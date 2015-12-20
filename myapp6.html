@@ -1,0 +1,54 @@
+<head>
+  <title>Timestamp</title>
+</head>
+
+<body>
+  
+  
+  
+  <header>
+    <div class="appTitle">TIMESTAMP</div>  
+    <div class="buttons">
+      <span class="in">START</span><span class="out">END</span>
+    </div>
+  </header>
+
+  <main>
+
+
+
+      {{#each timestamps}}
+       	{{> card}}
+      {{/each}}
+      
+      
+
+
+  </main>
+
+  <footer>
+    by Junho Kim
+  </footer>
+
+</body>
+
+<template name="card">
+  <section class="card">
+    <div class="card-menu">
+      <span class="card-remove">Remove</span>
+      <span class="card-edit">Edit</span>
+    </div>
+    <div class="card-title">
+      <h1><strong>{{date}}</strong></h1>
+    </div>
+    <div class="card-content">
+      START : {{inTime}}<br>
+      END : {{outTime}}<br>
+    </div>
+    <div class="card-summary">
+      Today`s working time :  {{workingTime}}
+    </div>
+  </section>
+</template>
+
+
