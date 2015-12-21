@@ -1,29 +1,10 @@
-<head>
-  <title>Timestamp</title>
-</head>
-
-<body>
-  
-  
-  
-  <header>
-    <div class="appTitle">TIMESTAMP</div>  
-    <div class="buttons">
-      <span class="in">START</span><span class="out">END</span>
-    </div>
-  </header>
-
+<template name="contents">
   <main>
-      {{#each timestamps}}
-       	{{> card}}
-      {{/each}}
+    {{#each timestamps}}
+      {{> card}}
+    {{/each}}
   </main>
-
-  <footer>
-    by Junho Kim
-  </footer>
-
-</body>
+</template>
 
 <template name="card">
   <section class="card">
@@ -43,5 +24,3 @@
     </div>
   </section>
 </template>
-
-

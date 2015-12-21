@@ -4,7 +4,7 @@ if (Meteor.isClient) {
 
   Meteor.subscribe("timestamp");
 
-  Template.body.helpers ({
+  Template.contents.helpers ({
     timestamps: function() {
       var timestamp = Timestamp.find({}).fetch(); 
 
@@ -33,26 +33,29 @@ if (Meteor.isClient) {
 
   });
 
+  Template.buttons.events ({
+   "click .in": function (event) {
+        event.preventDefault();
+
+        Meteor.call("recordInTime");
+      },
+
+      "click .out": function (event) {
+        event.preventDefault();
+
+        Meteor.call("recordOutTime");      
+      }
+  });
 
 
-  Template.body.events ({
-    "click .in": function (event) {
-      event.preventDefault();
+  Template.contents.events ({
 
-      Meteor.call("recordInTime");
-    },
+    
 
-    "click .out": function (event) {
-      event.preventDefault();
+    
+  });
 
-      Meteor.call("recordOutTime");      
-    },
-
-    "click .reset": function (event) {
-      event.preventDefault();
-
-      Meteor.call("reset"); // remove all timestamps  
-    },
+  Template.admin.events ({
 
     // develop mode methods
     "submit .new-inTime": function (event) {
@@ -64,11 +67,15 @@ if (Meteor.isClient) {
       event.preventDefault();
 
       Meteor.call("saveOutTime", event.target.hour.value, event.target.minute.value);  
+    },
+    "click .reset": function (event) {
+      event.preventDefault();
+
+      Meteor.call("reset"); // remove all timestamps  
     }
-
-
-
   });
+
+
 
 
 
@@ -129,10 +136,6 @@ Meteor.methods ({
 
 
 
-
-Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
-  });
 
 
 
