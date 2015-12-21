@@ -3,8 +3,8 @@
 
 TODOS:
 
-1. Remove / Edit feature
-2. App publishing
-3. Login
-3. Routing (+ admin)
-4. 
+1. User
+2. Remove / Edit feature
+3. file structure
+3. App beta open (iOS/Android)
+4. ?
