@@ -1,4 +1,8 @@
 <template name="admin">
+
+  {{>header}}
+  
+
   <form class="new-inTime">
     <input type="text" name="hour">시
     <input type="text" name="minute">분
@@ -17,5 +21,9 @@
     <button class="reset">Reset</button>
   
   <br/><br/>
-  
+
+  {{>contents}}
+  {{>footer}}
+
 </template>
+

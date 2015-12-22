@@ -33,25 +33,35 @@ if (Meteor.isClient) {
 
   });
 
+
+
   Template.buttons.events ({
    "click .in": function (event) {
         event.preventDefault();
 
         Meteor.call("recordInTime");
-      },
+    },
 
-      "click .out": function (event) {
-        event.preventDefault();
+    "click .out": function (event) {
+      event.preventDefault();
 
-        Meteor.call("recordOutTime");      
-      }
+      Meteor.call("recordOutTime");      
+    }
   });
 
 
   Template.contents.events ({
+    "click .remove": function (event) {
+      event.preventDefault();
 
-    
+      //Meteor.call("removeItem");
+    },
 
+    "click .edit": function (event) {
+      event.preventDefault();
+
+      //Meteor.call("editItem");      
+    }
     
   });
 
@@ -74,10 +84,6 @@ if (Meteor.isClient) {
       Meteor.call("reset"); // remove all timestamps  
     }
   });
-
-
-
-
 
   
 } // end of isClient

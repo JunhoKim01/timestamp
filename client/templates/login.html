@@ -1,21 +1,13 @@
-
 <template name="login">
-	{{#if not logged in}}
-  		{{>user.join}}
-	{{else}}
- 		{{>user.login}}
-	{{/if}}
-</template>
-
-<template name="user.login">
 	<form class="login">
 		<input type="email" class="email" placeholder="E-mail address">
   		<input type="password" class="password" placeholder="Password">
   		<button class="login">Log in</button>
+  		<p>If not a member? <a href="">Join now!</a></p>
  	</form>
 </template>
 
-<template name="user.join">
+<template name="join">
 	<form class="join">
 		<input type="name" class="name" placeholder="User name">
 		<input type="email" class="email" placeholder="E-mail address">
