@@ -1,7 +1,9 @@
 <template name="header">
   <header>
     <div class="appTitle">TIMESTAMP</div>  
-    {{>buttons}}
+    {{#if currentUser}}
+    	{{>buttons}}
+    {{/if}}	
   </header>
 </template>  
 
