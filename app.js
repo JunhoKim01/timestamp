@@ -116,6 +116,22 @@ Meteor.methods ({
     });
   },
 
+  // user 
+  join: function (options) {
+
+    //console.log(options);
+    if(options.username == null) {
+      Meteor.loginWithPassword(options, function() {
+        // welcome message
+        // TODOS: re-render main page
+      });
+    } else {
+       Accounts.createUser(options, function() {
+        alert("Welcome, " + options.username +"!");
+       });
+    }
+  },
+
 
   // develop mode methods
   saveInTime: function (hour, minute) {
