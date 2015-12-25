@@ -1,9 +1,12 @@
 <template name="header">
   <header>
-    <div class="appTitle"><a class="appTitle" href="/">TIMESTAMP</a></div>  
     {{#if currentUser}}
+    	{{username}} <a href="#" class="logout">Log out</a>
     	{{>buttons}}
+    {{else}}
+    	<div class="appTitle"><a class="appTitle" href="/">TIMESTAMP</a></div>  
     {{/if}}	
+
   </header>
 </template>  
 

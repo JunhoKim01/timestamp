@@ -6,12 +6,14 @@ if (Meteor.isClient) {
 
   Template.contents.helpers ({
     timestamps: function() {
-      var timestamp = Timestamp.find({}).fetch(); 
+      var card = Timestamp.find({owner: Meteor.userId()}).fetch(); 
+
+      //console.log(card);
 
       var locale = window.navigator.userLanguage || window.navigator.language;
       moment.locale(locale);
 
-      timestamp.forEach(function (log) {
+      card.forEach(function (log) {
         var inTime = moment.unix(log.inTime);
         var outTime = moment.unix(log.outTime);
 
@@ -28,7 +30,7 @@ if (Meteor.isClient) {
       
 
 
-      return timestamp;
+      return card;
     }
 
   });
@@ -65,25 +67,6 @@ if (Meteor.isClient) {
     
   });
 
-  Template.admin.events ({
-
-    // develop mode methods
-    "submit .new-inTime": function (event) {
-      event.preventDefault();
-
-      Meteor.call("saveInTime", event.target.hour.value, event.target.minute.value);  
-    },
-    "submit .new-outTime": function (event) {
-      event.preventDefault();
-
-      Meteor.call("saveOutTime", event.target.hour.value, event.target.minute.value);  
-    },
-    "click .reset": function (event) {
-      event.preventDefault();
-
-      Meteor.call("reset"); // remove all timestamps  
-    }
-  });
 
   
 } // end of isClient
@@ -102,6 +85,12 @@ Meteor.methods ({
     var now = moment().unix(); // unix timestamp
     
     Timestamp.insert({
+        owner: Meteor.userId(),
+        inTime: now,
+        outTime: null
+      });
+    console.log({
+        owner: Meteor.userId(),
         inTime: now,
         outTime: null
       });
@@ -111,32 +100,15 @@ Meteor.methods ({
     var now = moment().unix(); // unix timestamp
 
     Timestamp.update(
-      {outTime: null},
+      { outTime: null,
+        owner: Meteor.userId()},
       {$set: {outTime: now}
     });
   },
 
-  // user 
-  join: function (options) {
-
-    //console.log(options);
-    if(options.username == null) {
-      Meteor.loginWithPassword(options, function() {
-        // welcome message
-        // TODOS: re-render main page
-      });
-    } else {
-       Accounts.createUser(options, function() {
-        alert("Welcome, " + options.username +"!");
-       });
-
-       Meteor.user()
-
-    }
-  },
 
 
-  // develop mode methods
+  // admin methods
   saveInTime: function (hour, minute) {
 
     var now = moment().hours(hour).minutes(minute);
