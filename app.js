@@ -129,6 +129,9 @@ Meteor.methods ({
        Accounts.createUser(options, function() {
         alert("Welcome, " + options.username +"!");
        });
+
+       Meteor.user()
+
     }
   },
 

@@ -8,7 +8,7 @@ Template.login.events({
 
 var ERRORS_KEY = 'joinErrors';
 
-Template.join.onCreated(function() {
+Template.login.onCreated(function() {
   Session.set(ERRORS_KEY, {});
 });
 
