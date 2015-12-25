@@ -6,48 +6,6 @@ body {
   background:#d5d5d5;
 }
 
-header {
-  
-  /*width:98vw;
-  height:20vh; 
-   margin: 1rem 0 0 0;
-   */
-}
-
-
-div.appTitle {
-  color: white;  
-  text-align: center;
-
-  font: white;
-  font-size: 4rem;
-  font-weight:200;
-  margin: 2rem 0 1rem 0;
-}
-
-div.buttons {
-  margin: 0 1em 0 1em;
-}
-
-span.in, span.out {
-  display:inline-block;
-  width: 50%;
-
-
-
-  font-size: 1rem;
-  text-align: center;
-
-  color: #ffffff;
-  background: #00b875;
-  padding: 10px 0px 10px 0px;
-  text-decoration: none;
-}
-
-span.in:active, span.out:active {
-  background: #00a963;
-  color: #eeeeee;
-}
 
 
 main {

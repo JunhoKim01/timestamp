@@ -1,0 +1,22 @@
+<template name="loginJoin">
+	<div class="loginJoin">
+		<form class="loginJoin">		
+			{{#if isJoin}}
+				<input type="name" name="username" class="name" placeholder="User name">
+			{{/if}}
+			<input type="email" name="email" class="email" placeholder="E-mail address">
+	  		<input type="password" name="password" class="password" placeholder="Password">
+			{{#if isJoin}}
+				<input type="password" name="confirm" class="password" placeholder="Confirm password">
+				<input type="submit" class="join" value="Join" />
+			{{else}}
+				<input type="submit" class="login" value="Log in" />
+		  	{{/if}}
+		  	{{#if isJoin}}
+		  		<div class="loginJoin-change">Already member? <a href="" class="loginJoin-now">Log in now!</a></div>
+		  	{{else}}
+		  		<div class="loginJoin-change">Not a member? <a href="" class="loginJoin-now">Join now!</a></div>
+		  	{{/if}}
+	 	</form>
+ 	</div>
+</template>
