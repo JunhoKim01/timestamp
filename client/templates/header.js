@@ -16,3 +16,19 @@ Template.header.events ({
 		});
 	}
 });
+
+
+
+Template.buttons.events ({
+"click .in": function (event) {
+    event.preventDefault();
+
+    Meteor.call("recordInTime");
+},
+
+"click .out": function (event) {
+  event.preventDefault();
+
+  Meteor.call("recordOutTime");      
+}
+});
