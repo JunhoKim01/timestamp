@@ -1,5 +1,17 @@
 <template name="footer">
   <footer>
-    by Junho Kim
+    {{#if currentUser}}
+    	{{>buttons}}
+    {{else}}
+    	
+    {{/if}}	
   </footer>  
+</template>
+
+
+
+<template name="buttons">
+  <div class="buttons">
+    <span class="in">START</span><span class="out">END</span>
+  </div>
 </template>

@@ -1,1 +1,41 @@
 
+
+footer {
+  display:block;
+  position:relative;
+  width:100%;
+  margin: 0 1% 0 1%;
+  padding:1.5rem 0 0 0;
+
+  text-align: center;
+
+}
+
+
+div.buttons {
+  
+	position: fixed;
+    bottom: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+span.in, span.out {
+  display:inline-block;
+  width: 50%;
+
+
+
+  font-size: 1rem;
+  text-align: center;
+
+  color: #ffffff;
+  background: #00b875;
+  padding: 10px 0px 10px 0px;
+  text-decoration: none;
+}
+
+span.in:active, span.out:active {
+  background: #00a963;
+  color: #eeeeee;
+}

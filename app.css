@@ -4,6 +4,8 @@
 
 body {
   background:#d5d5d5;
+  width: 100%;
+  margin: 0;
 }
 
 main {
@@ -11,10 +13,12 @@ main {
   position:relative;
   width:100%;
   margin: 0 0 0 0;
-  padding:1.5rem 0 0 ;
+  padding:1rem 0 0 ;
   
   outline:border-radius: .25rem;
   overflow:hidden;
+
+  z-index: -1;
   /*
   transform:scale(.75);
   transform-origin:center 3rem;
@@ -22,16 +26,6 @@ main {
   */
 }
 
-footer {
-  display:block;
-  position:relative;
-  width:98%;
-  margin: 0 1% 0 1%;
-  padding:1.5rem 0 0 0;
-
-  text-align: center;
-
-}
 
 /*
 body:hover main {
@@ -139,7 +133,7 @@ span.card-remove, span.card-edit {
 }
 
 h1 {
-  font-size:2rem;
+  font-size:1.5rem;
   font-weight:200;
   margin: .5rem 0 .5rem 0;
 
