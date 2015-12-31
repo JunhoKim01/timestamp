@@ -1,16 +1,22 @@
 <template name="footer">
-  <footer>
+  <div class="ui green inverted vertical footer segment">
     {{#if currentUser}}
     	{{>buttons}}
     {{else}}
     	
     {{/if}}	
-  </footer>  
+  </div>  
 </template>
 
 
-
 <template name="buttons">
+  <div class="ui two green large buttons">
+    <button class="ui button">Check-In</button>
+    <button class="ui button">Check-Out</button>
+  </div>
+</template>
+
+<template name="buttons-old">
   <div class="buttons">
     <span class="in">START</span><span class="out">END</span>
   </div>

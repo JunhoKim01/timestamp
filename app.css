@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,700,500italic,900,700italic,900italic);
 
+/*
 * { font-family: 'Roboto', sans-serif; line-height:1.2; vertical-align:middle; }
+*/
 
 body {
   background:#d5d5d5;
@@ -8,24 +10,20 @@ body {
   margin: 0;
 }
 
+/*
 main {
   display:block;
   position:relative;
   width:100%;
-  margin: 0 0 0 0;
+  margin: 0;
   padding:1rem 0 0 ;
   
   outline:border-radius: .25rem;
   overflow:hidden;
 
   z-index: -1;
-  /*
-  transform:scale(.75);
-  transform-origin:center 3rem;
-  transition:transform .3s;
-  */
 }
-
+*/
 
 /*
 body:hover main {
@@ -45,13 +43,13 @@ header {
 */
 
 
-
+/*
 
 input, .card {
   position:relative;
   z-index:2;
 }
-
+*/
 /*
 input {
   display:block;
@@ -81,6 +79,8 @@ input:focus + header {
 }
 */
 
+
+/*
 .card {
   padding:1.5rem;
   box-shadow:0 1px 2px #aaa;
@@ -116,7 +116,6 @@ input:focus + header {
   font-size:.9rem;
   top:1.5rem;
   right:1rem;
-  /*content:"f";*/
   border:thin solid gray;
   color:gray;
   width:1rem;
@@ -125,30 +124,37 @@ input:focus + header {
   border-radius:50%;
   pointer-events:none;
 }
-
+*/
 span.card-remove, span.card-edit {
   display: block;
   margin-left: .5rem;
   float:right;
 }
 
+/*
 h1 {
   font-size:1.5rem;
   font-weight:200;
   margin: .5rem 0 .5rem 0;
 
 }
+*/
+
+/*
 strong {
   font-weight:300;
   color:#539D00;
 }
+*/
 
+/*
 h2 {
   font-size:.9rem;
   line-height:2.5;
   color:gray;
   font-weight:400;
 }
+*/
 
 /*
 .map {

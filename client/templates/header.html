@@ -1,4 +1,25 @@
 <template name="header">
+	<div class="ui fixed inverted green main menu">
+		<div id="mainmenu" class="ui conatiner">
+	    	{{#if currentUser}}
+	    		<a class="launch icon item">
+	      			<i class="content icon"></i>
+	    		</a>
+		    	<div class="item">{{username}}</div>
+		     	<!-- <div class="item"><a href="#" class="logout">Log out</a></div> -->
+		     	<div class="right menu">
+		     		
+		     	</div>	
+	    	{{else}} <!-- Cannot be seen -->
+	      		<div class="appTitle"><a class="appTitle" href="#">TIMESTAMP</a></div>  
+	    	{{/if}}	
+	 	</div>
+	</div>
+</template>  
+
+
+
+<template name="header-old">
   <header>
     {{#if currentUser}}
       <div class="username">{{username}}

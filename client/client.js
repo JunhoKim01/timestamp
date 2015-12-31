@@ -12,7 +12,7 @@ if (Meteor.isClient) {
     */
     
     timestamps: function() {
-      var card = Timestamp.find({}).fetch(); 
+      var card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
 
       if(card == null) {
         console.log("Nothing fetched");
@@ -28,9 +28,11 @@ if (Meteor.isClient) {
         var tempOutTime = moment.unix(item.outTime);
 
         item.date = tempInTime.format('LL');
-        item.inTime = tempInTime.format('LT');
+        // item.inTime = tempInTime.format('LT');
+        item.inTime = tempInTime.format('a h:mm');
         if(item.outTime != null) { 
-          item.outTime = tempOutTime.format('LT');
+          // item.outTime = tempOutTime.format('LT');
+          item.outTime = tempOutTime.format('a h:mm');
           item.workingTime = moment.duration(tempOutTime-tempInTime).humanize();
         }
 

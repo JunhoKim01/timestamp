@@ -1,12 +1,74 @@
 <template name="contents">
-  <main> 
+  <div class="main"> 
+    <div class="ui stackable cards">
+    <div class="card" id="new card">
+      <i class="add square icon"></i> Add new timestamp
+    </div>
+
     {{#each timestamps}}
       {{> card}}
     {{/each}}
-  </main>
+    </div>
+  </div>
 </template>
 
 <template name="card">
+  <div class="card">
+    <div class="ui segments">
+      <div class="ui segment">
+        <h4 class="ui header">{{date}}</h4>
+      </div>
+      <div class="ui horizontal segments">
+        <div class="ui segment">
+          <i class="sign in icon"></i>{{inTime}}
+        </div>
+        <div class="ui segment">
+          <i class="sign out icon"></i>{{outTime}}
+        </div>
+      </div>
+      <div class="ui segment">
+        <i class="wait icon"></i>{{workingTime}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="card_old_2">
+  <div class="card">
+    <div class="content">
+      <div class="ui large green header">{{date}}</div>
+    </div>
+    <!-- <div class="content"> -->
+      <div class="ui two column divided grid">
+        <div class="column">        
+        <!-- <div class="ui segment"> -->
+          <div class="ui mini statistic">
+            <div class="label">Check-in</div>
+            <div class="value">{{inTime}}</div>
+          </div>  
+        <!-- </div>   -->
+        </div>
+        
+        <!-- <div class="ui vertical divider">~</div> -->
+        
+        <div class="column">    
+        <!-- <div class="ui segment">     -->
+          <div class="ui mini statistic">
+            <div class="label">Check-out</div>
+            <div class="value">{{outTime}}</div>
+          </div>
+        <!-- </div> -->
+        </div>  
+      </div>
+    <!--  </div> -->
+    <div class="content">
+      <span>working time :  {{workingTime}}</span>
+    </div>
+  </div> 
+</template>
+
+
+<template name="card_old">
   <section class="card">
     <div class="card-menu">
       <span class="card-remove">Remove</span>
