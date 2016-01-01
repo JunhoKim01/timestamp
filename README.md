@@ -7,10 +7,14 @@ TODOS:
   - ~~Login & Join~~ _done._
   - ~~Logout~~ _done._
   - login input error 
-2. menu 
-  - hamburger menu with user info
+2. Sidebar
+  - user info
+  - statistics
+  - open source
+3. Pages
   - simple statistics
-  - date picker
+4. Search
+  - datepicker  
 3. Remove / Edit timestamps
   - Remove
   - Edit

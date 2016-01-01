@@ -25,7 +25,7 @@ Template.loginJoin.helpers({
 
 /* events */
 Template.loginJoin.events ({
-	"submit.loginJoin": function (event, template) {
+	"click #loginJoin": function (event, template) {
         event.preventDefault();
 
         var username = template.$('[name=username]').val();
@@ -73,7 +73,7 @@ Template.loginJoin.events ({
 		Router.go('app');
 
     },
-    "click a.loginJoin-now": function (event) {
+    "click #signUpToggle": function (event) {
         event.preventDefault();
 		Session.set(isJoin, ! Session.get(isJoin)); // toggle
     }

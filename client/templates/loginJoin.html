@@ -1,4 +1,76 @@
 <template name="loginJoin">
+
+	<div class="ui middle aligned center aligned padded grid">
+		
+		<div class="column">
+			
+			<h1 class="ui center aligned inverted icon header">
+			  <i class="wait icon"></i>
+			  TIMESTAMP
+			</h1>
+			<form class="ui form">
+				<div class="ui segment">
+
+					{{#if isJoin}}
+						<!-- User name address -->
+						<div class="field">
+							<div class="ui left icon input">
+								<i class="add user icon"></i>
+								<input type="text" name="username" placeholder="User name">	
+							</div>
+						</div>
+					{{/if}}
+						<!-- email address -->
+						<div class="field">
+							<div class="ui left icon input">
+								<i class="user icon"></i>
+								<input type="email" name="email" placeholder="E-mail address">
+							</div>
+						</div>
+
+						<!-- password -->
+						<div class="field">
+							<div class="ui left icon input">
+								<i class="lock icon"></i>
+								<input type="password" name="password" placeholder="Password">
+							</div>
+						</div>
+					{{#if isJoin}}
+						<!-- password confirm-->
+						<div class="field">
+							<div class="ui left icon input">
+								<i class="lock icon"></i>
+								<input type="password" name="confirm" placeholder="Password confirm">
+							</div>
+						</div>
+						<!-- signup button -->
+						<div id="loginJoin" class="ui fluid green submit button">Sign Up</div>
+					{{else}}
+						<!-- Login button -->
+						<div id="loginJoin" class="ui fluid green submit button">Login</div>
+					{{/if}}
+
+				</div>
+	      		<div class="ui error message"></div>
+	    	</form>	
+	    	<div class="ui message">
+	    		{{#if isJoin}}
+	      			Already a member? <a href="#" id="signUpToggle">Login</a>
+	      		{{else}}
+	      			Not a member? <a href="#" id="signUpToggle">Sign Up</a>
+	      		{{/if}}
+	    	</div>
+		</div>
+		
+
+	</div>	
+</template>
+
+
+
+
+
+<template name="loginJoin_old">
 	<div class="loginJoin">
 		<form class="loginJoin">		
 			{{#if isJoin}}
