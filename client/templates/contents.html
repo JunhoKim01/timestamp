@@ -1,8 +1,11 @@
 <template name="contents">
   <div class="main"> 
     <div class="ui stackable cards">
-    <div class="card" id="new card">
-      <i class="add square icon"></i> Add new timestamp
+      <!-- Add new timestamp -->
+    <div class="card" id="new-checkin">
+      <div class="ui green inverted segment">
+        <i class="add square icon"></i> Add new timestamp
+      </div>
     </div>
 
     {{#each timestamps}}
@@ -19,12 +22,18 @@
         <h4 class="ui header">{{date}}</h4>
       </div>
       <div class="ui horizontal segments">
-        <div class="ui segment">
+        <div class="ui segment timestamp">
           <i class="sign in icon"></i>{{inTime}}
         </div>
-        <div class="ui segment">
-          <i class="sign out icon"></i>{{outTime}}
+        {{#if outTime}}
+        <div class="ui segment timestamp">
+            <i class="sign out icon"></i>{{outTime}}
         </div>
+        {{else}}
+        <div class="ui green inverted segment timestamp" id="new-checkout">
+          <i class="add square icon"></i>Checkout
+        </div>
+        {{/if}}
       </div>
       <div class="ui segment">
         <i class="wait icon"></i>{{workingTime}}
@@ -32,6 +41,18 @@
     </div>
   </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <template name="card_old_2">
   <div class="card">

@@ -1,4 +1,12 @@
 
-#new card {
+#new-card {
 	background-color: transparent;
+}
+
+div.ui.segment.timestamp {
+	width: 50%;
+}
+
+div.ui.green.inverted.segment.timestamp {
+	width: 50%;
 }

@@ -57,6 +57,16 @@ if (Meteor.isClient) {
       event.preventDefault();
 
       //Meteor.call("editItem");      
+    },
+    "click #new-checkin": function (event) {
+      event.preventDefault();
+
+      Meteor.call("recordInTime");
+    },
+    "click #new-checkout": function (event) {
+      event.preventDefault();
+
+      Meteor.call("recordOutTime", this._id);
     }
     
   });
