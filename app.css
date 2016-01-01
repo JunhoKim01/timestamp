@@ -125,11 +125,14 @@ input:focus + header {
   pointer-events:none;
 }
 */
+
+/*
 span.card-remove, span.card-edit {
   display: block;
   margin-left: .5rem;
   float:right;
 }
+*/
 
 /*
 h1 {

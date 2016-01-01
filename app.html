@@ -1,14 +1,16 @@
 <template name="app">
+	{{>sidebar}}
+	{{>header}}
+	<div class="pusher">
+		{{#if currentUser}}
+			{{>contents}}
+		{{else}}
+			{{>loginJoin}}
+		{{/if}}
+	</div>
 
-  {{>header}}
-  
-  {{#if currentUser}}
-  	{{>contents}}
-  {{else}}
-  	{{>loginJoin}}
-  {{/if}}
-  
-  
-  <!-- {{>footer}} -->
+	<!-- {{>footer}} -->
 
 </template>
+
+

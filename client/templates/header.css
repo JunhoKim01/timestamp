@@ -32,11 +32,3 @@ a.logout {
 #mainmenu {
   display: flex;
 }
-
-div.main {
-  overflow: hidden;
-}
-
-div.ui.stackable.cards {
-    padding-top: 60px;
-}

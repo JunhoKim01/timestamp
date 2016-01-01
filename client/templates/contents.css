@@ -10,3 +10,16 @@ div.ui.segment.timestamp {
 div.ui.green.inverted.segment.timestamp {
 	width: 50%;
 }
+
+/*
+div.main {
+  overflow: hidden;
+}
+*/
+
+
+
+div.ui.stackable.cards {
+    padding-top: 60px;
+     overflow: hidden;
+}

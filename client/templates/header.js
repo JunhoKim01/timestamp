@@ -1,11 +1,4 @@
-Template.header.helpers ({
 
-	username: function() {
-		return Meteor.user().username;
-	}
-
-
-});
 
 Template.header.events ({
 
@@ -14,7 +7,12 @@ Template.header.events ({
 		Meteor.logout(function() {
 			Router.go('app');
 		});
-	}
+	},
+	"click a.launch.icon.item": function(event) {
+		
+		$('.ui.sidebar').sidebar('toggle');		
+		
+	}	
 });
 
 

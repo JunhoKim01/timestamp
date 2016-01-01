@@ -68,6 +68,8 @@ if (Meteor.isClient) {
 
       Meteor.call("recordOutTime", this._id);
     }
+
+
     
   });
 

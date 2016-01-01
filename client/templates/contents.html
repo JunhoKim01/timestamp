@@ -1,10 +1,10 @@
 <template name="contents">
-  <div class="main"> 
+  <!-- <div class="main">  -->
     <div class="ui stackable cards">
       <!-- Add new timestamp -->
     <div class="card" id="new-checkin">
       <div class="ui green inverted segment">
-        <i class="add square icon"></i> Add new timestamp
+        <i class="add square icon"></i> Check-In
       </div>
     </div>
 
@@ -12,7 +12,7 @@
       {{> card}}
     {{/each}}
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <template name="card">
@@ -31,7 +31,7 @@
         </div>
         {{else}}
         <div class="ui green inverted segment timestamp" id="new-checkout">
-          <i class="add square icon"></i>Checkout
+          <i class="add square icon"></i>Check-Out
         </div>
         {{/if}}
       </div>
@@ -40,70 +40,4 @@
       </div>
     </div>
   </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="card_old_2">
-  <div class="card">
-    <div class="content">
-      <div class="ui large green header">{{date}}</div>
-    </div>
-    <!-- <div class="content"> -->
-      <div class="ui two column divided grid">
-        <div class="column">        
-        <!-- <div class="ui segment"> -->
-          <div class="ui mini statistic">
-            <div class="label">Check-in</div>
-            <div class="value">{{inTime}}</div>
-          </div>  
-        <!-- </div>   -->
-        </div>
-        
-        <!-- <div class="ui vertical divider">~</div> -->
-        
-        <div class="column">    
-        <!-- <div class="ui segment">     -->
-          <div class="ui mini statistic">
-            <div class="label">Check-out</div>
-            <div class="value">{{outTime}}</div>
-          </div>
-        <!-- </div> -->
-        </div>  
-      </div>
-    <!--  </div> -->
-    <div class="content">
-      <span>working time :  {{workingTime}}</span>
-    </div>
-  </div> 
-</template>
-
-
-<template name="card_old">
-  <section class="card">
-    <div class="card-menu">
-      <span class="card-remove">Remove</span>
-      <span class="card-edit">Edit</span>
-    </div>
-    <div class="card-title">
-      <h1><strong>{{date}}</strong></h1>
-    </div>
-    <div class="card-content">
-      START : {{inTime}}<br>
-      END : {{outTime}}<br>
-    </div>
-    <div class="card-summary">
-      Today`s working time :  {{workingTime}}
-    </div>
-  </section>
 </template>
