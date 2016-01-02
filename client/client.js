@@ -1,9 +1,17 @@
-// session
-var isEdit = 'isEdit';
-Session.setDefault(isEdit, false);
+// // session
+// var isEdit = 'isEdit';
+// Session.setDefault(isEdit, false);
+
 
 
 if (Meteor.isClient) {
+
+
+  Meteor.startup(function () {
+    
+
+  });
+
 
   Meteor.subscribe("timestamp");
 
