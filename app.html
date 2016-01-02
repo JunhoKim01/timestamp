@@ -1,5 +1,41 @@
 <template name="app">
 
+	<!-- menubar -->
+	<div class="ui fixed borderless green inverted menu">
+		<a class="item">
+			TIMESATMP
+		</a>
+		<a class="item">
+			STATISTICS
+		</a>
+		
+		<div class="right menu">
+			<a class="item">
+			    	<i class="fitted search icon"></i>
+		    </a>
+		    <div class="ui dropdown item">
+		    	<i class="fitted ellipsis vertical icon"></i>
+		    	<div class="menu">
+		        	<a class="item">Edit</a>
+		        	<a class="item">Settings</a>
+		        	<a class="item">Log out</a>
+		      	</div>
+		    </div>
+		</div>
+
+	</div>
+	<!-- contents -->
+	<div class="ui bottom attached segment">
+		{{>contents}}
+	</div>
+
+</template>
+
+
+
+
+<template name="app_old">
+
 	<!-- {{#if currentUser}} -->
 		{{>sidebar}}
 		{{>header}}

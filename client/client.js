@@ -1,3 +1,7 @@
+// session
+var isEdit = 'isEdit';
+Session.setDefault(isEdit, false);
+
 
 if (Meteor.isClient) {
 
@@ -63,11 +67,33 @@ if (Meteor.isClient) {
 
       Meteor.call("recordInTime");
     },
-    "click #new-checkout": function (event) {
+    "click div.ui.green.inverted.segment.timestamp": function (event) {
       event.preventDefault();
 
       Meteor.call("recordOutTime", this._id);
+    },
+
+    /* eidt */
+    "click #toggle-eidt": function (event) {
+      event.preventDefault();
+      Session.set(isEdit,!Session.get(isEdit));
+    },
+
+    "click label.remove": function (event) {
+      event.preventDefault();
+
+      Meteor.call("removeItem", this._id);
+    },
+
+    /* card dropdown */
+
+    "click .ui.dropdown": function (event) {
+      event.preventDefault();
+      
+      $('.ui.dropdown').dropdown();
+
     }
+
 
 
     
