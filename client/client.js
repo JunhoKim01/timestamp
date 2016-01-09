@@ -25,19 +25,22 @@ if (Meteor.isClient) {
     */
     
     timestamps: function() {
+
+      // No need to find this user because ti already filtered with publish func on server.js
       var card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
 
-      if(card == null) {
-        console.log("Nothing fetched");
-        return ;
-      }
+
+      // if(card == null) {
+      //   console.log("Nothing fetched");
+      //   return ;
+      // }
       
       var locale = window.navigator.userLanguage || window.navigator.language;
       moment.locale(locale);
       
       card.forEach(function (item) {
         
-        var tempInTime = moment.unix(item.inTime);
+        var tempInTime = moment.unix(item.inTime); // Change unix timestamp to moment.
         var tempOutTime = moment.unix(item.outTime);
 
         item.date = tempInTime.format('LL');
@@ -46,7 +49,7 @@ if (Meteor.isClient) {
         if(item.outTime != null) { 
           // item.outTime = tempOutTime.format('LT');
           item.outTime = tempOutTime.format('a h:mm');
-          item.workingTime = moment.duration(tempOutTime-tempInTime).humanize();
+          item.workingTime = moment.duration(tempOutTime - tempInTime).humanize();
         }
 
       });
@@ -74,12 +77,13 @@ if (Meteor.isClient) {
     "click #new-checkin": function (event) {
       event.preventDefault();
 
-      Meteor.call("recordInTime");
+      Meteor.call("newCheckIn");
     },
-    "click div.ui.green.inverted.segment.timestamp": function (event) {
+    "click #new-checkout": function (event) {
       event.preventDefault();
 
-      Meteor.call("recordOutTime", this._id);
+      Meteor.call("newCheckOut", this._id);
+
     },
 
     /* eidt */

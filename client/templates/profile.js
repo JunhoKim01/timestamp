@@ -1,4 +1,23 @@
-// profile.js
+// session
+var expAmount = 'expAmount';
+Session.setDefault(expAmount, 0);
+
+// profile class
+
+// var profile = {}
+// 	name: "",
+// 	level: ,
+// 	exp: 0,
+// 	company: null,
+// 	ranking: null,
+// }
+
+// var gainExp = function () {
+
+// }; 
+
+
+// helpers
 
 Template.profile.helpers ({
 	
@@ -19,8 +38,8 @@ Template.profile.helpers ({
 });
 
 
+
+
 Template.profile.events ({
-
-
 
 });
