@@ -11,9 +11,16 @@ Template.admin.events ({
 
     Meteor.call("saveOutTime", event.target.hour.value, event.target.minute.value);  
   },
-  "click .reset": function (event) {
+  "click .resetRecords": function (event) {
     event.preventDefault();
 
     Meteor.call("reset"); // remove all timestamps  
+  },
+  "click .resetUsers": function (event) {
+    event.preventDefault();
+
+    Meteor.call("resetUser"); // remove all timestamps  
   }
+
+
 });

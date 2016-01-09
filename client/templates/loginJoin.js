@@ -45,8 +45,8 @@ Template.loginJoin.events ({
 		if(Session.get(isJoin)) {
 			// join
 			if (! username) {
-	      		errors.username = 'User name required';
-	    	}
+				errors.username = 'User name required';
+			}
 	    	if (confirm !== password) {
 		    	errors.confirm = 'Please confirm your password';
 		    }
@@ -56,9 +56,11 @@ Template.loginJoin.events ({
 		      return;
 			}
 
-			Accounts.createUser(username, email, password, function() {
-        		alert("Welcome, " + username +"!");
-       		});
+			// user create
+			Meteor.call("createUserProfile", email, password, username);
+
+			// login 
+			Meteor.loginWithPassword(email, password);
 
 		} else {
 			// login
