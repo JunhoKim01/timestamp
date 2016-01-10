@@ -37,9 +37,24 @@ Template.menubar.helpers ({
 
 Template.menubar.events ({
 
+	// -----------------------
+  	// Menubar buttons
+  	// -----------------------
 
-	"clic ui.dropdown.item": function() {
+  	"click #home": function(event) {
+  		Session.set(tabStatus,'contents');
+  	},
+  	"click #profile": function(event) {
+  		Session.set(tabStatus,'profile');	
+  	},
+	
+	// -----------------------
+  	// Dropdown buttons
+  	// -----------------------
 
+	"click #toggle-edit": function (event) {
+		
+		Session.set('isEditMode',!Session.get('isEditMode'));
 	},
 	"click #logout": function(event) {
 		//$('.ui.sidebar').sidebar('toggle');	// toglle sidebar before logout
@@ -47,13 +62,9 @@ Template.menubar.events ({
 
 			Router.go('app');
 		});
-	},
-	"click #home": function(event) {
-		Session.set(tabStatus,'contents');
-	},
-	"click #profile": function(event) {
-		Session.set(tabStatus,'profile');	
 	}
+
+	
 
 
 });

@@ -10,13 +10,17 @@ TODOS:
 ~~2. Sidebar~~ 
 2. Pages
   - Main page (TIMESTAMPS)
-  - User Profile & statistics
+  - User Profile & statistics 
+    - exp 
+    - chart (show 7 days check-in/out time)
+    - rank
+    - level (level up with exp)
 3. Menubar 
-  - dropdown menu position
+  - ~~dropdown menu position~~ _done._
 4. Search
   - datepicker  
 3. Remove / Edit timestamps
-  - Remove
+  - ~~Remove~~ _done. 
   - Edit
 4. UI
   - Infinite scroll 

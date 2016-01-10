@@ -1,51 +1,43 @@
 <template name="profile">
+	<div id="spacer"></div>
+	
 	<div class="ui segments">
-		<div class="ui horizontal segments">
-			<div class="ui center aligned segment">
-	    	 	<div class="ui statistic">
-	    			<div class="value">{{level}}</div>
-	    	    	<div class="label">Level</div>
-	    	  	</div>
-		    </div>
-		    <div class="ui center aligned segment">
-	    	 	<div class="ui statistic">
-	    			<div class="value">{{exp}}</div>
-	    	    	<div class="label">EXP</div>
-	    	  	</div>
-		    </div>
+		<div class="ui center aligned segment">
+		 	<img class="ui centered small circular image" src="/images/doge.jpeg">
+			<h2>{{username}}</h2>
 		</div>
-		<div class="ui horizontal segments">
-			<div class="ui center aligned segment">
-	    	 	<div class="ui statistic">
-	    			<div class="value">{{ranking}}</div>
-	    	    	<div class="label">RANK</div>
-	    	  	</div>
-		    </div>
-		    <div class="ui center aligned segment">
-	    	 	<div class="ui statistic">
-	    			<div class="value">{{username}}</div>
-	    	    	<div class="label">Name</div>
-	    	  	</div>
-		    </div>
+		<div class="ui center aligned segment">
+		 	<h3>Level {{level}}</h3>
+		  	{{> expbar}}
 		</div>
+		<!-- <div class="ui center aligned segment">
+		 	<div class="ui statistic">
+		 		<div class="label">RANK</div>
+				<div class="value">{{ranking}}</div>
+		  	</div>
+		</div> -->
 	</div>
 	
-	<!-- <div class="ui card">
-	  	<div class="circle image">
-	    	<img src="/images/avatar2/large/kristy.png">
-	  	</div>
+</template>
+
+
+
+
+ <!-- <div class="ui centered card">
+	  	
+	    
+	  	
 		<div class="content">
-			<p>{{username}}</p>
+			<img class="ui centered small circular image" src="/images/doge.jpeg">
+			<h2>{{username}}</h2>
 		</div>
 		<div class="content">
-			<p>totalWorkingTime</p>
+			Level {{level}}
 		</div>
 		<div class="content">
-			<p>averageWorkingTime</p>
+			{{> expbar}}
 		</div>
 		<div class="extra content">
-			Share button
+			
 		</div>
 	</div> -->
-
-</template>

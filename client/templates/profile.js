@@ -1,6 +1,6 @@
 // session
-var expAmount = 'expAmount';
-Session.setDefault(expAmount, 0);
+// var expAmount = 'expAmount';
+// Session.setDefault(expAmount, 0);
 
 // profile class
 
