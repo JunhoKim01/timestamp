@@ -64,7 +64,7 @@ Template.modalremove.onRendered(function () {
 			    onApprove : function() {
 			    	// go ahead
 			    	//console.log("remove approved : " + Session.get('removeItem'));
-			    	Meteor.call("removeItem", Session.get('removeItem'));
+			    	Meteor.call("removeItemWithEXP", Session.get('removeItem'));
 			    }
 			  });  
 	
@@ -72,11 +72,18 @@ Template.modalremove.onRendered(function () {
 
 
 Template.contents.events ({
-	"click #remove-card": function (event) {
+	"click #remove-item": function (event) {
 		event.preventDefault();
-		Session.set('removeItem',this._id);
-		$('.ui.basic.modal').modal('show');
-		//Meteor.call("removeItem", this._id);
+		console.log(this);
+		if (this.exp == null) {
+			Meteor.call("removeItem", this);
+		} else {
+			// If EXP gained with this timestamp
+			Session.set('removeItem',this); // save this item to Session
+			$('.ui.basic.modal').modal('show');		
+		}
+		
+		
 	}
 });
 
