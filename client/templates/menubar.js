@@ -45,7 +45,8 @@ Template.menubar.events ({
   		Session.set(tabStatus,'contents');
   	},
   	"click #profile": function(event) {
-  		Session.set(tabStatus,'profile');	
+  		Session.set(tabStatus,'profile');
+  		Session.set('isEditMode',false);
   	},
 	
 	// -----------------------
