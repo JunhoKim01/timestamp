@@ -19,36 +19,15 @@ Template.contents.helpers ({
 	  	var card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
 
 
-
-
-		// if(card == null) {
-		//   console.log("Nothing fetched");
-		//   return ;
-		// }
-	  
-	  	
-
 		// get data & chagne format
 		card.forEach(function (item) {
 
 			var tempInTime = moment(item.inTime);   // unix timestamp in milliseconds
 
-			//console.log(tempInTime);
-			//console.log(tempOutTime);
-
 			if (item.outTime != null) {
 				var tempOutTime = moment(item.outTime); // unix timestamp in milliseconds		
 				item.outTime = tempOutTime.format('a h:mm');
-				//var workingMinutes = Math.round(moment.duration(item.workingTime).asMinutes());
-				//console.log(workingMinutes);
-				//var hours = Math.floor(workingMinutes/60);
-				//var minutes = workingMinutes%60;
-				//item.workingTime = moment.duration(item.workingTime).hours() + ":" + moment.duration(item.workingTime).minutes();
-				item.workingTime = moment.preciseDiff(tempInTime, tempOutTime);
-
-				//console.log(moment.duration(item.workingTime).hours() + " : " + moment.duration(item.workingTime).minutes());
-
-				//console.log(item.workingTime);
+				item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, locale);
 			}
 
 			item.date = tempInTime.format('LL');

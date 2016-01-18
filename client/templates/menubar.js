@@ -48,6 +48,10 @@ Template.menubar.events ({
   		Session.set(tabStatus,'profile');
   		Session.set('isEditMode',false);
   	},
+  	"click #hashtag": function(event) {
+  		Session.set(tabStatus,'hashtag');
+  		Session.set('isEditMode',false);
+  	},
 	
 	// -----------------------
   	// Dropdown buttons

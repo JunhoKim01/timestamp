@@ -1,0 +1,21 @@
+<template name="hashtag">
+	<div id="spacer"></div>
+	
+	
+	<h1>#me</h1>
+	<ul>
+      <li>Total workingtime : {{totalWorkingtime "hh"}}</li>
+      <li>Average workingtime : {{avgWorkingtime me}}</li>
+      <li>Top workingtime : {{topWorkingtime me}}</li>
+    </ul>
+
+	<h1>SelectedHashtags here : </h1>
+	<ul>
+      <li>Total workingtime : {{totalWorkingtime tags}}</li>
+      <li>Average workingtime : {{avgWorkingtime tags}}</li>
+      <li>Top workingtime : {{topWorkingtime tags}}</li>
+    </ul>
+
+
+	
+</template>
