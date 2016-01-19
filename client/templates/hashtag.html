@@ -2,20 +2,30 @@
 	<div id="spacer"></div>
 	
 	
-	<h1>#me</h1>
+	{{>selectedHashtags}}
+
 	<ul>
       <li>Total workingtime : {{totalWorkingtime "hh"}}</li>
       <li>Average workingtime : {{avgWorkingtime me}}</li>
       <li>Top workingtime : {{topWorkingtime me}}</li>
     </ul>
 
-	<h1>SelectedHashtags here : </h1>
-	<ul>
-      <li>Total workingtime : {{totalWorkingtime tags}}</li>
-      <li>Average workingtime : {{avgWorkingtime tags}}</li>
-      <li>Top workingtime : {{topWorkingtime tags}}</li>
-    </ul>
+	
 
 
 	
+</template>
+
+
+
+<template name="selectedHashtags">
+	
+	{{#each selectedHashtags}}
+		<a class="ui label">
+	  		{{this}}
+	  		<i class="delete icon"></i>
+		</a>	
+	{{/each}}
+	
+
 </template>

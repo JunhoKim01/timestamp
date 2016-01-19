@@ -35,6 +35,7 @@ Template.contents.helpers ({
 
 		});	
 
+
 		return card;
 	}
 
