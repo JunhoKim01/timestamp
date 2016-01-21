@@ -27,7 +27,7 @@ Template.selectedHashtags.helpers ({
 		var hashtagArr = Session.get('selectedHashtags');
 		hashtagArr.forEach(function (currentValue, index, array) {
 			array[index] = '#' + currentValue;
-			console.log(array[index]);
+			//console.log(array[index]);
 		});
 		//var hashtagArr = [{hashtag:"one"},{hashtag:"two"}];
 

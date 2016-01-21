@@ -32,9 +32,12 @@ Template.contents.helpers ({
 
 			item.date = tempInTime.format('LL');
 			item.inTime = tempInTime.format('a h:mm');
+			
+			item.hashtag.forEach(function (currentValue, index, array) {
+				array[index] = '#' + currentValue;
+			});
 
 		});	
-
 
 		return card;
 	}
@@ -46,15 +49,11 @@ Template.contents.helpers ({
 });
 
 
-Template.card.helpers({
-	isEditMode: function () {
-		return Session.get(isEditMode);
-	}
-});
 
 
 Template.modalremove.onRendered(function () {
 	
+	/*
 	$('.ui.basic.modal')
 			.modal({
 			    closable  : true,
@@ -84,49 +83,14 @@ Template.modalremove.onRendered(function () {
 		    		});
 			    }
 			});  
-	
+	*/
+
 });
 
 
 
 
-Template.card.events ({
-	"click #remove-item": function (event, template) {
-		event.preventDefault();
-		//console.log(template.$('.card'));
-		//console.log(template.$('.card')[0]);
-		var thisCard = this; // set data context
-		if (thisCard.exp == null) {
-			//console.log(template.$('.card')[0]);
 
-			template.$('.card').transition({
-			    animation  : 'fade left',
-			    duration   : '650ms',
-			    onComplete : function() {
-			    	// remove this item when scale transition is completed
-			    	Meteor.call("removeItem", thisCard);
-			    }
-			});
-			
-
-
-			
-		} else {
-			
-			// If EXP gained with this timestamp
-			
-			//console.log(template);
-			//console.log(template.$('.card'));
-			removeTemplate = template;		// save this template instance to removeTemplate global variable
-			Session.set('removeItem',this); // save this data context to Session
-			
-			
-			$('.ui.basic.modal').modal('show');
-		}
-		
-		
-	}
-});
 
 
 
@@ -156,7 +120,18 @@ Template.contents.events ({
 		event.preventDefault();
 
 		Meteor.call("newCheckOut", this._id);
+	},
+	"click #new-hashtag": function (event) {
+		event.preventDefault();
 
+		let newHashtag = "newHashtag";
+		this.hashtag.forEach(function (currentValue, index, array) {
+			if (currentValue.charAt(0) === '#' ) {
+				array[index] = currentValue.slice( 1 );
+			}
+				
+		});
+		Meteor.call("newHashtag", this._id, newHashtag, this.hashtag);
 	},
 
 	// -----------------------
