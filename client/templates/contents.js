@@ -50,50 +50,6 @@ Template.contents.helpers ({
 
 
 
-
-Template.modalremove.onRendered(function () {
-	
-	/*
-	$('.ui.basic.modal')
-			.modal({
-			    closable  : true,
-			    blurring  : true,
-			    onDeny    : function(){
-			    	// exit
-			    	return;
-			    },
-			    onApprove : function() {
-			    	// go ahead
-			    	//console.log("remove approved : " + Session.get('removeItem'));
-					//var thisTemplate = Session.get('removeTemplate');		    	
-
-					if (removeTemplate == null) {
-						console.log("removeTemplate is null");
-						return;
-					}
-
-			    	removeTemplate.$('.card').transition({
-			    		animation  : 'fade left',
-		    		    duration   : '650ms',
-		    		    onComplete : function() {
-		    		    	// remove this item when scale transition is completed
-		    		    	Meteor.call("removeItemWithEXP", Session.get('removeItem'));
-		    		    	removeTemplate = null; // destory removeTemplate object;
-		    		    }
-		    		});
-			    }
-			});  
-	*/
-
-});
-
-
-
-
-
-
-
-
 Template.contents.events ({
 	"click .remove": function (event) {
 		event.preventDefault();
@@ -121,18 +77,7 @@ Template.contents.events ({
 
 		Meteor.call("newCheckOut", this._id);
 	},
-	"click #new-hashtag": function (event) {
-		event.preventDefault();
-
-		let newHashtag = "newHashtag";
-		this.hashtag.forEach(function (currentValue, index, array) {
-			if (currentValue.charAt(0) === '#' ) {
-				array[index] = currentValue.slice( 1 );
-			}
-				
-		});
-		Meteor.call("newHashtag", this._id, newHashtag, this.hashtag);
-	},
+	
 
 	// -----------------------
   	// Edit mode buttons
