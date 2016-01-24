@@ -1,0 +1,35 @@
+<template name="app">
+
+
+	<!-- {{#if Template.subscriptionsReady}} -->
+    <!-- This is displayed when all data is ready. -->
+	    <!-- {{#if currentUser}} -->
+	    	<!-- menubar -->
+	    	{{>menubar}}
+	    	<!-- contents -->
+	    	{{>Template.dynamic template=getTabStatus}}
+
+	    	
+
+
+	    <!-- {{else}} -->
+	    	<!-- {{>loginJoin}} -->
+	    	<!-- {{>atForm}} -->
+	    <!-- {{/if}} -->
+
+	    <!-- modals -->
+	    {{>modalAddHashtag}}
+
+	<!-- {{else}}
+		Loading...
+	{{/if}} -->
+
+
+	
+
+
+	
+	
+
+</template>
+

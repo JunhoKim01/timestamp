@@ -11,17 +11,27 @@ Template.loginJoin.onCreated(function() {
 
 /* helpers */
 Template.loginJoin.helpers({
-  errorMessages: function() {
-    return _.values(Session.get(ERRORS_KEY));
-  },
-  errorClass: function(key) {
-    return Session.get(ERRORS_KEY)[key] && 'error';
-  },
-  isJoin: function() {
-  	return Session.get(isJoin); 
-  }
+	errorMessages: function() {
+    	return _.values(Session.get(ERRORS_KEY));
+  	},
+	errorClass: function(key) {
+		return Session.get(ERRORS_KEY)[key] && 'error';
+	},
+	isJoin: function() {
+		return Session.get(isJoin); 
+	},
+
+	atDisabled: function() {
+		return AccountsTemplates.disabled();
+	},
+	atClass: function() {
+		return AccountsTemplates.disabled() ? 'disabled' : 'active';
+	}
+
+
 
 });
+
 
 /* events */
 Template.loginJoin.events ({

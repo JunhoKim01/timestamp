@@ -1,0 +1,59 @@
+
+<template name="card">
+
+  <div class="card">
+
+    <div class="ui segments">
+      	<div class="ui segment">
+        	
+        	<div class="content">
+	        	<h4 class="ui header">{{date}}</h4>
+	          
+	        	{{#each hashtag}}
+	          		<!-- <a class="ui label"> -->
+	        			{{this}}&nbsp; 
+	        			{{#if isEditMode}}
+	        				<i class="delete icon" id="remove-hashtag"></i>
+	        			{{/if}}
+	        		<!-- </a> -->
+	          	{{/each}}
+
+	          	
+	          	  	<!-- <a class="ui label" id="new-hashtag"> -->
+	          			<i id="new-hashtag" class="add square icon"></i>
+	          			
+	          	  	<!-- </a>  -->
+          	  	
+
+				<!-- edit mode -->
+				{{#if isEditMode}}
+	            	<a class="ui right corner label" id="remove-item">
+	              	<i class="remove icon"></i>
+	            	</a>
+	        	{{/if}}
+	        </div>
+	        
+	     </div>
+
+	    <div class="ui horizontal segments">
+	        <div class="ui segment timestamp">
+	        	<i class="sign in icon"></i>{{inTime}}
+	        </div>
+	        {{#if outTime}}
+	        	<div class="ui segment timestamp">
+	            	<i class="sign out icon"></i>{{outTime}}
+	          	</div>
+	        {{else}}
+		        <div class="ui green inverted segment timestamp" id="new-checkout">
+		        	<i class="add square icon"></i>Check-Out
+		        </div>
+	        {{/if}}
+	    </div>
+	    <div class="ui segment">
+			<i class="wait icon"></i>{{workingTime}}
+	      </div>
+	    </div>
+
+	  </div>
+
+</template>

@@ -65,7 +65,7 @@ Template.menubar.events ({
 		//$('.ui.sidebar').sidebar('toggle');	// toglle sidebar before logout
 		Meteor.logout(function() {
 
-			Router.go('app');
+			Router.go('splash');
 		});
 	}
 
