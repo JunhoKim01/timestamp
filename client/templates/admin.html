@@ -25,5 +25,27 @@
 
 
 
+
+
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+      <tr>
+        <td>{{_id}}</td>
+        <td>{{profile.name}}</td>
+        <td>{{emails.[0].address}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
 </template>
 

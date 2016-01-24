@@ -1,20 +1,16 @@
 <template name="loginJoin">
-
 	<div class="ui middle aligned center aligned padded grid">
-		
 		<div class="column">
-			
 			<h1 class="ui center aligned inverted icon header">
-			  <i class="wait icon"></i>
-			  TIMESTAMP
+				<i class="wait icon"></i>
+				TIMESTAMP
 			</h1>
 			<form class="ui form">
 				<div class="ui segment">
-
 					{{#if isJoin}}
 						<!-- User name address -->
 						<div class="field">
-							<div class="ui left icon input">
+							<div class="ui left icon input {{errorClass 'username'}}">
 								<i class="add user icon"></i>
 								<input type="text" name="username" placeholder="User name">	
 							</div>
@@ -22,15 +18,14 @@
 					{{/if}}
 						<!-- email address -->
 						<div class="field">
-							<div class="ui left icon input">
+							<div class="ui left icon input {{errorClass 'email'}}">
 								<i class="user icon"></i>
 								<input type="email" name="email" placeholder="E-mail address">
 							</div>
 						</div>
-
 						<!-- password -->
 						<div class="field">
-							<div class="ui left icon input">
+							<div class="ui left icon input {{errorClass 'password'}}">
 								<i class="lock icon"></i>
 								<input type="password" name="password" placeholder="Password">
 							</div>
@@ -38,7 +33,7 @@
 					{{#if isJoin}}
 						<!-- password confirm-->
 						<div class="field">
-							<div class="ui left icon input">
+							<div class="ui left icon input {{errorClass 'confirm'}}">
 								<i class="lock icon"></i>
 								<input type="password" name="confirm" placeholder="Password confirm">
 							</div>
@@ -49,20 +44,27 @@
 						<!-- Login button -->
 						<div id="loginJoin" class="ui fluid green submit button">Login</div>
 					{{/if}}
-
 				</div>
-	      		<div class="ui error message"></div>
+	      		
 	    	</form>	
+
 	    	<div class="ui message">
 	    		{{#if isJoin}}
-	      			Already a member? <a href="#" id="signUpToggle">Login</a>
+	      			Already a member? <a href="#" id="signUpToggle">&nbsp;Login</a>
 	      		{{else}}
-	      			Not a member? <a href="#" id="signUpToggle">Sign Up</a>
+	      			Not a member? <a href="#" id="signUpToggle">&nbsp;Sign Up</a>
 	      		{{/if}}
 	    	</div>
-
+	    	{{#if errorMessages}}
+	  		<div class="ui error message">
+	  			<ul class="list">
+		    			{{#each errorMessages}}
+		    				<li>{{this}}</li>
+		    			{{/each}}
+		    	</ul>
+		    </div>
+    		{{/if}}
 		</div>
-
 	</div>	
 </template>
 

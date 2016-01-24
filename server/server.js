@@ -5,6 +5,9 @@ if (Meteor.isServer) {
 		return Timestamp.find({owner: this.userId});
 		//return Timestamp.find({});
 	});
+	Meteor.publish('users', function (){ 
+		return Meteor.users.find({});
+	});
 
 }
 

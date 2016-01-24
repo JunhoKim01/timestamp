@@ -24,3 +24,14 @@ Template.admin.events ({
 
 
 });
+
+Template.admin.helpers ({
+  users: function () {
+    let user = Meteor.users.find({}).fetch(); 
+    // if(user.emails[0].address)
+    //   user.emailAddr = user.emails[0].address;
+
+    return Meteor.users.find({});
+  },
+
+});

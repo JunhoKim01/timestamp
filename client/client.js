@@ -10,6 +10,7 @@ if (Meteor.isClient) {
 
 
   Meteor.subscribe("timestamp");
+  Meteor.subscribe("users");
   
 } 
 
