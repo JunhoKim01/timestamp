@@ -9,37 +9,18 @@ Template.card.helpers({
 Template.card.events ({
 	"click #remove-item": function (event, template) {
 		event.preventDefault();
-		//console.log(template.$('.card'));
-		//console.log(template.$('.card')[0]);
-		let thisCard = this; // set data context
-		//if (thisCard.exp == null) {
-			//console.log(template.$('.card')[0]);
 
-			template.$('.card').transition({
-			    animation  : 'fade left',
-			    duration   : '600ms',
-			    onComplete : function() {
-			    	// remove this item when scale transition is completed
-			    	Meteor.call("removeItem", thisCard);
+		const self = this; 
 
-			    }
-			});
-			
+		template.$('.card').transition({
+		    animation  : 'fade left',
+		    duration   : '600ms',
+		    onComplete : function() {
+		    	// remove this item when scale transition is completed
+		    	Meteor.call("removeItem", self);
 
-
-			
-		// } else {
-			
-		// 	// If EXP gained with this timestamp
-			
-		// 	//console.log(template);
-		// 	//console.log(template.$('.card'));
-		// 	removeTemplate = template;		// save this template instance to removeTemplate global variable
-		// 	Session.set('removeItem',this); // save this data context to Session
-			
-			
-		// 	$('.ui.basic.modal').modal('show');
-		// }
+		    }
+		});
 	},
 	"click #new-hashtag": function (event, template) {
 		event.preventDefault();

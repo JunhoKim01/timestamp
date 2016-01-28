@@ -12,37 +12,40 @@ var removeTemplate = null;
 
 Template.contents.helpers ({
 
-	timestamps: function () {
+    timestamps: function () {
 
-		// No need to find this user 
-		// because ti already filtered with publish func on server.js
-	  	var card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
+        // No need to find this user 
+        // because ti already filtered with publish func on server.js
+        let card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
 
 
-		// get data & chagne format
-		card.forEach(function (item) {
+        // get data & chagne format
+        card.forEach(function (item) {
 
-			var tempInTime = moment(item.inTime);   // unix timestamp in milliseconds
+            const tempInTime = moment(item.inTime);   // unix timestamp in milliseconds
 
-			if (item.outTime != null) {
-				var tempOutTime = moment(item.outTime); // unix timestamp in milliseconds		
-				item.outTime = tempOutTime.format('a h:mm');
-				item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, locale);
-			}
+            if (item.outTime != null) {
+                const tempOutTime = moment(item.outTime); // unix timestamp in milliseconds       
+                item.outTime = tempOutTime.format('a h:mm');
+                item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, locale);
+            }
 
-			item.date = tempInTime.format('LL');
-			item.inTime = tempInTime.format('a h:mm');
-			
-			item.hashtag.forEach(function (currentValue, index, array) {
-				array[index] = '#' + currentValue;
-			});
+            item.date = tempInTime.format('LL');
+            item.inTime = tempInTime.format('a h:mm');
+            
+            item.hashtag.forEach(function (currentValue, index, array) {
+                array[index] = '#' + currentValue;
+            });
 
-		});	
+        }); 
 
-		return card;
-	}
+        return card;
+    },
+    date: function () {
+        return moment().format('LL');
+    }
 
-	
+    
 
 
 
@@ -51,53 +54,77 @@ Template.contents.helpers ({
 
 
 Template.contents.events ({
-	"click .remove": function (event) {
-		event.preventDefault();
+    "click .remove": function (event) {
+        event.preventDefault();
 
-	  	//Meteor.call("removeItem");
-	},
+        //Meteor.call("removeItem");
+    },
 
-	"click .edit": function (event) {
-		event.preventDefault();
+    "click .edit": function (event) {
+        event.preventDefault();
 
-	  	//Meteor.call("editItem");      
-	},
+        //Meteor.call("editItem");      
+    },
 
-	// -----------------------
-  	// Check in & out buttons
-  	// -----------------------	
+    // -----------------------
+    // Check in & out buttons
+    // -----------------------  
 
-	"click #new-checkin": function (event) {
-	 	event.preventDefault();
+    // Create new check-in.
+    'click #add-newCheckIn': function (event) {
+        event.preventDefault();
+        
+        const checkInTime = Date.now(); // javascript date now
+        const checkOutTime = null; 
+        const text = $('#add-newCheckText').val();
+        const hashtagArr = []; // extract hashtag from text
+        Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
+    },
+    // Create new check-in & check out time once.
+    'click #add-newCheckOut': function (event) {
+        event.preventDefault();
+        
+        const checkInTime = 0; // Get it from modal
+        const checkOutTime = Date.now(); // javascript date now
+        const text = $('#add-newCheckText').val();
+        const hashtagArr = []; // extract hashtag from text
+        Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
+    },
+    
+    
+    // Add check-out log to already exist card. And, there is no 'add-
+    // existingCheckIn' because check-in time will always be set when new card
+    // is added.
+    'click #add-existingCheckOut': function (event) {
+        event.preventDefault();
+        const self = this;
+        const checkOutTime = Date.now(); // javascript date now
+        const text = ''; 
+        const hashtagArr = []; // extract hashtag from text
+        Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
+    },
+    
+    
 
-		Meteor.call("newCheckIn");
-	},
-	"click #new-checkout": function (event) {
-		event.preventDefault();
-
-		Meteor.call("newCheckOut", this._id);
-	},
-	
-
-	// -----------------------
-  	// Edit mode buttons
-  	// -----------------------	
+    // -----------------------
+    // Edit mode buttons
+    // -----------------------  
 
 
-  	
+    
 
 
 
-	// -----------------------
-  	// Dropdown buttons
-  	// -----------------------	
+    // -----------------------
+    // Dropdown buttons
+    // -----------------------  
 
-	"click .ui.dropdown": function (event) {
-		event.preventDefault();
-	  
-		//$('.ui.dropdown').dropdown();
+    "click .ui.dropdown": function (event) {
+        event.preventDefault();
+      
+        //$('.ui.dropdown').dropdown();
 
-	}
+    }
 
 
 
