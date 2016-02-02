@@ -1,6 +1,14 @@
 Template.card.helpers({
 	isEditMode: function () {
 		return Session.get('isEditMode');
+	},
+	isReadonly: function () {
+		const self = this;
+
+		if (self.inTime && self.outTime)
+			return 'readonly';
+		else
+			return '';
 	}
 });
 

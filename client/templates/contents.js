@@ -80,28 +80,34 @@ Template.contents.events ({
         const hashtagArr = []; // extract hashtag from text
         Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
     },
-    // Create new check-in & check out time once.
+    // Create new check-in & check out time at once.
     'click #add-newCheckOut': function (event) {
         event.preventDefault();
         
         const checkInTime = 0; // Get it from modal
-        const checkOutTime = Date.now(); // javascript date now
+        const checkOutTime = Date.now(); // Javascript date now
         const text = $('#add-newCheckText').val();
-        const hashtagArr = []; // extract hashtag from text
+        const hashtagArr = []; // Extract hashtag from text
         Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
+
+        $('#add-newCheckText').val(''); // Clear the textarea
+        // Set the textarea non editable
     },
     
     
-    // Add check-out log to already exist card. And, there is no 'add-
-    // existingCheckIn' because check-in time will always be set when new card
+    // Add check-out log to already exist card. 
+    // Cf. There is no 'add-existingCheckIn' because check-in time will always be set when new card
     // is added.
     'click #add-existingCheckOut': function (event) {
         event.preventDefault();
         const self = this;
+        //console.log(self);
         const checkOutTime = Date.now(); // javascript date now
-        const text = ''; 
+        const text = self.text;
         const hashtagArr = []; // extract hashtag from text
         Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
+
+        //self.// Set the textarea non editable
     },
     
     
