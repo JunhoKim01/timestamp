@@ -1,3 +1,5 @@
+
+
 Template.card.helpers({
 	isEditMode: function () {
 		return Session.get('isEditMode');
@@ -8,7 +10,7 @@ Template.card.helpers({
 		if (self.inTime && self.outTime)
 			return 'readonly';
 		else
-			return '';
+			return 'editable';
 	}
 });
 
