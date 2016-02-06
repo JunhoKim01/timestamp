@@ -1,12 +1,10 @@
 // session
-var isEditMode = 'isEditMode';
+const isEditMode = 'isEditMode';
 Session.setDefault(isEditMode, false);
 Session.setDefault('removeItem', null);
 Session.setDefault('removeTemplate', null);
 
-// get locale
-var locale = window.navigator.userLanguage || window.navigator.language;
-moment.locale(locale);
+
 
 var removeTemplate = null;
 
@@ -25,7 +23,7 @@ Template.contents.helpers ({
       if (item.outTime != null) {
           const tempOutTime = moment(item.outTime); // unix timestamp in milliseconds       
           item.outTime = tempOutTime.format('a h:mm');
-          item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, locale);
+          item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, Session.get('locale'));
         }
 
         item.date = tempInTime.format('LL');
@@ -69,8 +67,18 @@ Template.contents.events ({
 
         const checkInTime = Date.now(); // javascript date now
         const checkOutTime = null; 
-        const text = $('#add-newCheckText').val();
-        const hashtagArr = []; // extract hashtag from text
+        const text = $('#add-newCheckText').val().trim();
+        //let newHashtag = text;
+        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
+        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
+      
+        // Extract hashtag from text & remove #
+        const hashtagArr = _.map(text.match(regex), function (hashtag) {
+          if( hashtag.charAt(0) === '#' )
+            hashtag = hashtag.slice(1);
+          return hashtag;
+        }); 
+        console.log(hashtagArr);
         Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
 
         $('#add-newCheckText').val(''); // Clear the textarea
@@ -84,8 +92,19 @@ Template.contents.events ({
         checkInTimeObj.setHours(9, 0, 0, 0); // Set checkInTime`s hours/minutes/seconds/ms to 09:00:00:000 (default)
         const checkInTime = checkInTimeObj.getTime();
 
-        const text = $('#add-newCheckText').val();
-        const hashtagArr = []; // Extract hashtag from text
+        const text = $('#add-newCheckText').val().trim();
+        //let newHashtag = text;
+        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
+        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
+        
+        // Extract hashtag from text & remove #
+        const hashtagArr = _.map(text.match(regex), function (hashtag) {
+          if( hashtag.charAt(0) === '#' )
+            hashtag = hashtag.slice( 1 );
+          return hashtag;
+        }); 
+
+        console.log(hashtagArr);
         Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
 
         $('#add-newCheckText').val(''); // Clear the textarea
@@ -100,8 +119,18 @@ Template.contents.events ({
       const self = this;
         //console.log(self);
         const checkOutTime = Date.now(); // javascript date now
-        const text = self.text;
-        const hashtagArr = []; // extract hashtag from text
+        const text = self.text.trim();
+        //let newHashtag = text;
+        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
+        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
+        
+        // Extract hashtag from text & remove #
+        const hashtagArr = _.map(text.match(regex), function (hashtag) {
+          if( hashtag.charAt(0) === '#' )
+            hashtag = hashtag.slice( 1 );
+          return hashtag;
+        }); 
+        console.log(hashtagArr);
         Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
 
         //self.// Set the textarea non editable

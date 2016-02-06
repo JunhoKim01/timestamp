@@ -14,12 +14,17 @@ Template.admin.events ({
   "click .resetRecords": function (event) {
     event.preventDefault();
 
-    Meteor.call("reset"); // remove all timestamps  
+    Meteor.call("resetRecords"); // remove all timestamps  
+  },
+  "click #resetHashtags": function (event) {
+    event.preventDefault();
+
+    Meteor.call("resetHashtags"); // remove all hashtags
   },
   "click .resetUsers": function (event) {
     event.preventDefault();
 
-    Meteor.call("resetUser"); // remove all timestamps  
+    Meteor.call("resetUser"); // remove all users
   }
 
 
@@ -27,11 +32,18 @@ Template.admin.events ({
 
 Template.admin.helpers ({
   users: function () {
-    let user = Meteor.users.find({}).fetch(); 
+    //let user = Meteor.users.find({}).fetch(); 
     // if(user.emails[0].address)
     //   user.emailAddr = user.emails[0].address;
 
     return Meteor.users.find({});
+  },
+  hashtags: function () {
+    //let hahstag = Hashtag.find({}).fetch(); 
+    // if(user.emails[0].address)
+    //   user.emailAddr = user.emails[0].address;
+
+    return Hashtag.find({}); 
   },
 
 });

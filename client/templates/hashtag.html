@@ -1,31 +1,40 @@
 <template name="hashtag">
 	<div id="spacer"></div>
+
+  {{>suggestedHashtags}}
 	
-	
+	<div class="ui search">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="#hashtags...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+
 	{{>selectedHashtags}}
 
-	<ul>
-      <li>Total workingtime : {{totalWorkingtime "hh"}}</li>
-      <li>Average workingtime : {{avgWorkingtime me}}</li>
-      <li>Top workingtime : {{topWorkingtime me}}</li>
+  {{#with hashtagInfo}}
+    <ul>
+      <li>Total time : {{totalTime}}</li>
+      <li>Total count : {{count}}</li>
+      <li>Average time : {{avgTime}}</li>
     </ul>
+  {{/with}}
 
-	
-
-
-	
 </template>
 
-
-
 <template name="selectedHashtags">
-	
 	{{#each selectedHashtags}}
 		<a class="ui label">
-	  		{{this}}
-	  		<i class="delete icon"></i>
+  		{{this}}
+  		<i id="remove-hashtag" class="delete icon"></i>
 		</a>	
 	{{/each}}
-	
+</template>
 
+<template name="suggestedHashtags">
+  <h1 class="ui header">Suggested hashtags</h1>
+  {{#each suggestedHashtags}}
+    <a id="add-hashtag" class="ui label">#{{name}}</a>  
+  {{/each}}
 </template>

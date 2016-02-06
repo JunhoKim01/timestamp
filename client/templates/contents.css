@@ -34,3 +34,10 @@ div.ui.cards {
      overflow: hidden;
 }
 
+.hashtag {
+
+  color: #FD7A79;
+  font-style: bold;
+  text-decoration: none;
+}
+

@@ -19,7 +19,6 @@
     <button class="in">In</button>
     <button class="out">Out</button>
     <button class="resetRecords">Reset record</button>
-    <button class="resetUser">Reset</button>
   
   <br/><br/>
 
@@ -41,6 +40,26 @@
         <td>{{_id}}</td>
         <td>{{profile.name}}</td>
         <td>{{emails.[0].address}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<button id="resetHashtags">Reset Hashtags</button>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>count</th>
+      <th>total time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each hashtags}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{count}}</td>
+        <td>{{totalTime}}</td>
       </tr>
     {{/each}}
   </tbody>

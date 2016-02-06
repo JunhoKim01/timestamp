@@ -19,31 +19,26 @@ Template.card.helpers({
 Template.card.events ({
 	"click #remove-item": function (event, template) {
 		event.preventDefault();
-
-		const self = this; 
-
+		
+		const self = this;
+		
 		template.$('.card').transition({
 		    animation  : 'fade left',
 		    duration   : '600ms',
 		    onComplete : function() {
 		    	// remove this item when scale transition is completed
 		    	Meteor.call("removeItem", self);
-
 		    }
 		});
 	},
 	"click #new-hashtag": function (event, template) {
 		event.preventDefault();
-
-		
-
 		//Session.set('hashtag', insert);
 
 		// this.hashtag.forEach(function (currentValue, index, array) {
 		// 	if (currentValue.charAt(0) === '#' ) {
 		// 		array[index] = currentValue.slice( 1 );
 		// 	}
-				
 		// });
 
 		//Meteor.call("newHashtag", this._id, newHashtag);
@@ -52,8 +47,6 @@ Template.card.events ({
 		// 	console.log("null");
 		// else 
 		// 	console.log(template.$('.ui.modal'));
-
-
 
 		let self = this;
 		$('.ui.modal')
@@ -106,9 +99,6 @@ Template.card.events ({
 		    }
 		})
 		.modal('show');  
-
-
-
 	},
 	"click #remove-hashtag":function (event) {
 		event.preventDefault();
