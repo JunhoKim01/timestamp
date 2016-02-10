@@ -3,12 +3,18 @@ Session.setDefault('selectedHashtags', selectedHashtagArr);
 
 // helpers
 
+Template.hashtag.onCreated(function () {
+  this.autorun(() => {
+    this.subscribe('timestamp.stat');
+    this.subscribe('hashtag');
+  });
+});
 
 Template.hashtag.onRendered(function () {
 
-  let hashtags = _.map(Hashtag.find({count: {$gte: 1} }).fetch(), function (obj) {
-    obj.name = '#' + obj.name;
-    return obj;
+  let hashtags = _.map(Hashtag.find({count: {$gte: 1} }).fetch(), function (tag) {
+    tag.name = '#' + tag.name;
+    return tag;
   });
 
   $('.ui.search').search({
@@ -37,28 +43,51 @@ Template.hashtag.onRendered(function () {
 });
 
 
-Template.hashtag.helpers ({
-	
+Template.hashtag.helpers ({	
   hashtagInfo: function () {
+    let result = {
+      totalTime: 'None',
+      count: 'None',
+      avgTime: 'None'
+    };
+
+    // Get current selected hashtags.
     let selectedHashtagArr = Session.get('selectedHashtags');
+
+    if(selectedHashtagArr.length === 0)
+      return result;
 
     let sumCount = 0;
     let sumTotalTime = 0;
+    let findingHashtagArr = [];
 
-    for (let i = 0; i < selectedHashtagArr.length; i++) {
-      let item = Hashtag.find({name:selectedHashtagArr[i]}).fetch()[0];
-      if(item && item.count && item.totalTime) {
-        sumCount += item.count;
-        sumTotalTime += item.totalTime;
+    // Get timestamps that contain selected hashtags.
+    for (let i = 0; i < selectedHashtagArr.length; i++) { 
+      findingHashtagArr.push({hashtag: selectedHashtagArr[i]});
+    }
+    const query = {
+      $and: findingHashtagArr
+    };
+    const item = Timestamp.find(query).fetch();
+
+    if (item.length === 0) {
+      return result;
+    }
+
+    // Accumulation 
+    for (let i = 0; i < item.length; i++) {
+      if(item[i]) {
+        sumCount += 1;
+        sumTotalTime += item[i].workingTime;
       } else
         sumCount += 0;
         sumTotalTime += 0;
     };
 
-    let result = {
-      totalTime: moment.preciseDiff(0, sumTotalTime, Session.get('locale')) || "Empty",
-      count: sumCount || "Empty",
-      avgTime: moment.preciseDiff(0, sumTotalTime/sumCount, Session.get('locale')) || "Empty"
+    result = {
+      totalTime: moment.preciseDiff(0, sumTotalTime, Session.get('locale')) || 'None',
+      count: sumCount || 'None',
+      avgTime: moment.preciseDiff(0, sumTotalTime/sumCount, Session.get('locale')) || 'None'
     };
 
     return result;
@@ -69,9 +98,18 @@ Template.hashtag.helpers ({
 
 Template.suggestedHashtags.helpers ({
     suggestedHashtags: function () {
-      let tag = Hashtag.find({count: {$gte: 1}}, {sort: {count: -1}, limit:10}).fetch(); 
-      return tag;
-    }
+      return Hashtag.find(
+        // selector
+        {
+          count: 
+            {$gte: 1}
+        },
+        // options
+        {
+          sort: {count: -1},
+          limit: 5
+        }); 
+      }
 });
 
 

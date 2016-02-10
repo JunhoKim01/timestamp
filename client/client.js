@@ -10,11 +10,7 @@ if (Meteor.isClient) {
     moment.locale(locale);
     Session.set('locale', locale);
   });
-
-
-  Meteor.subscribe("timestamp");
-  Meteor.subscribe("hashtag");
-  Meteor.subscribe("users");
+  
   
 } 
 

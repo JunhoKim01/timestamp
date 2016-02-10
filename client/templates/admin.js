@@ -1,3 +1,11 @@
+Template.admin.onCreated(function () {
+  this.autorun(() => {
+    this.subscribe('users');
+    this.subscribe('hashtag');
+  });
+
+});
+
 Template.admin.events ({
 
   // develop mode methods
@@ -43,7 +51,7 @@ Template.admin.helpers ({
     // if(user.emails[0].address)
     //   user.emailAddr = user.emails[0].address;
 
-    return Hashtag.find({}); 
+    return Hashtag.find({}, {sort: {count: -1}}); 
   },
 
 });

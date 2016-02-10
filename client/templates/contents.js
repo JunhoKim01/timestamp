@@ -3,10 +3,17 @@ const isEditMode = 'isEditMode';
 Session.setDefault(isEditMode, false);
 Session.setDefault('removeItem', null);
 Session.setDefault('removeTemplate', null);
-
+Session.setDefault('loadedItem', 3);
 
 
 var removeTemplate = null;
+
+
+Template.contents.onCreated(function () {
+  this.autorun(() => {
+    this.subscribe('timestamp.item', Session.get('loadedItem'));
+  });
+});
 
 Template.contents.helpers ({
 
@@ -156,7 +163,16 @@ Template.contents.events ({
       
         //$('.ui.dropdown').dropdown();
 
-      }
+      },
+
+    // -----------------------
+    // Load more items
+    // -----------------------  
+    "click #loadMoreItems": function (event) {
+      event.preventDefault();
+      Session.set('loadedItem', Session.get('loadedItem') + 3);
+    }
+
 
 
 

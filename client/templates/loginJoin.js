@@ -29,57 +29,61 @@ Template.loginJoin.helpers({
 /* events */
 Template.loginJoin.events ({
   "click #loginJoin": function (event, template) {
-
     event.preventDefault();
 
-    var username = template.$('[name=username]').val();
-    var email = template.$('[name=email]').val();
-    var password = template.$('[name=password]').val();
-    var confirm = template.$('[name=confirm]').val();
+    let username, confirm;
+    const email = template.$('[name=email]').val().trim();
+    const password = template.$('[name=password]').val().trim();  
 
-    var errors = {};
+    let errors = {};
 
-    
+    if (! email) {
+      errors.email = 'Email required';
+      console.log('Email required');
+    }
+    if (! password) {
+      errors.password = 'Password required';
+      console.log('Password required');
+    }
 
-    if(Session.get(isJoin)) {
-      // join
+    Session.set(ERRORS_KEY, errors);
+    if (_.keys(errors).length) {
+      return;
+    }
+
+
+    // Check email address. 
+    const regex = /[a-zA-Z0-9]+(?:(\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/g; // email regex
+    if (! email.match(regex)) {
+      errors.email = 'Use Appropriate Email address'
+      Session.set(ERRORS_KEY, errors);
+      if (_.keys(errors).length) {
+        return;
+      }
+    }
+
+    if (Session.get(isJoin)) {
+      // Login
+      username = template.$('[name=username]').val().trim();
+      confirm = template.$('[name=confirm]').val().trim();
+
       if (! username) {
         errors.username = 'User name required';
         console.log('Password required');
       }
-      if (! email) {
-        errors.email = 'Email required';
-        console.log('Email required');
-      }
-      if (! password) {
-        errors.password = 'Password required';
-        console.log('Password required');
-      } else {
-        if (confirm !== password) {
-          errors.confirm = 'Please confirm your password';
-          console.log('Please confirm your password');
-        }
+      if (confirm !== password) {
+        errors.confirm = 'Please confirm your password';
+        console.log('Please confirm your password');
+      } else if (password.length < 8 || password.length > 20 ) {
+        errors.confirm = 'Password must be 8~20 letters';
       }
 
       Session.set(ERRORS_KEY, errors);
       if (_.keys(errors).length) {
         return;
       }
-
-      // user create
-      // var result = "";
-      // result = Meteor.call("createUserProfile", email, password, username);
-      //console.log("createUserProfile result : " + result);
-
-    
-      // let options = {
-      //   email: email,
-      //   password: password,
-      //   profile: {
-      //    name:username
-      //   }
-      // };
       
+      // Create user
       Accounts.createUser({
         email: email,
         password: password,
@@ -94,76 +98,22 @@ Template.loginJoin.events ({
         Router.go('app');
       });
 
-      
-
-      //Meteor.call("createUserProfile", email, password, username, 
-
-      //  function(error) {
-      //  if (error) {
-      //    errors.create = error.reason;
-      //    Session.set(ERRORS_KEY, errors);
-      //     return; 
-      //   }
-      //   Meteor.loginWithPassword(email, password, function(error) {
-      //     if (error) {
-      //       Session.set(ERRORS_KEY, errors);
-      //       return; 
-      //     }
-           
-      //     Router.go('app');
-      //   });
-
-      // });
-      
-      //if(result == null) {
-        
-        //errors.join = "Sign up failed";
-
-        // Session.set(ERRORS_KEY, errors);
-        // if (_.keys(errors).length) {
-       //      return;
-        // }
-      //} else {
-        // login 
-
     } else {
-      // login
-      if (! email) {
-        errors.email = 'Email required';
-        console.log('Email required');
-      }
-      if (! password) {
-        errors.password = 'Password required';
-        console.log('Password required');
-      }
-      Session.set(ERRORS_KEY, errors);
-      if (_.keys(errors).length) {
-        return;
-      }
-
+      // Login
       Meteor.loginWithPassword(email, password, 
         function(error) {
           if (error) {
             return Session.set(ERRORS_KEY, {'login': error.reason});
           }
-          // if(arguments.length > 0) {
-          //  errors.join = "Please check your Email or Password";
-          //  Session.set(ERRORS_KEY, errors);
-          //  if (_.keys(errors).length) {
-          //    return;
-          //  }
-          // } else {
           Router.go('app');
-          
         });
     }
 
-    
-
-    },
-    "click #signUpToggle": function (event) {
-      event.preventDefault();
-      Session.set(isJoin, ! Session.get(isJoin)); // toggle
-    }
+  },
+  "click #signUpToggle": function (event) {
+    event.preventDefault();
+    Session.set(isJoin, ! Session.get(isJoin)); // toggle
+    Session.set(ERRORS_KEY, {}); // Clear Error key
+  }
 
 });

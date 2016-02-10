@@ -2,33 +2,38 @@
   <!-- <div class="main">  -->
     <div class="ui one cards"> <!-- Has a problem of showing just one row in wider screens -->
       <!-- Add new timestamp -->
-    <div class="card">
-      <div class="ui attached segment">
-        <h4 class="ui header">{{date}}</h4>
-        <div class="ui fluid transparent form">
-          <div class="field">
-            <textarea id="add-newCheckText" rows="4" placeholder="How`s today?"></textarea>
+      <div class="card">
+        <div class="ui attached segment">
+          <h4 class="ui header">{{date}}</h4>
+          <div class="ui fluid transparent form">
+            <div class="field">
+              <textarea id="add-newCheckText" rows="4" placeholder="How`s today?"></textarea>
+            </div>
+          </div>
+          <!-- <div class="ui fluid transparent input">
+            <input type="text" placeholder="How`s today?">
+          </div> -->  
+        </div>
+        <div class="ui two bottom attached buttons">
+          <div class="ui green button" id="add-newCheckIn">
+            In
+          </div>
+
+          <div class="ui green button" id="add-newCheckOut">
+            Out
           </div>
         </div>
-        <!-- <div class="ui fluid transparent input">
-          <input type="text" placeholder="How`s today?">
-        </div> -->  
-      </div>
-      <div class="ui two bottom attached buttons">
-        <div class="ui green button" id="add-newCheckIn">
-          In
-        </div>
 
-        <div class="ui green button" id="add-newCheckOut">
-          Out
-        </div>
       </div>
 
-    </div>
+      {{#each timestamps}}
+        {{> card}}
+      {{/each}}
 
-    {{#each timestamps}}
-      {{> card}}
-    {{/each}}
+      <div class="card">
+        <button id="loadMoreItems" class="fluid ui button">Load more...</button>
+      </div>
+
     </div>
   <!-- </div> -->
 </template>
