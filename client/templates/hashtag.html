@@ -1,18 +1,48 @@
 <template name="hashtag">
 	<div id="spacer"></div>
 
-  {{>suggestedHashtags}}
-	
-	<div class="ui search">
-    <div class="ui icon input">
+  <div class="ui one column centered stackable grid">
+    {{#if Template.subscriptionsReady}}
+      <div class="column">{{>hashtagSearch}}</div>
+      <div class="column">
+        <!-- Suggested hashtags :  -->
+        {{>suggestedHashtags}}
+      </div>
+      <div class="column">{{>selectedHashtags}}</div>
+      <div class="column">{{>hashtagGraph}}</div>
+      <div class="column">test</div>
+    {{else}}
+      {{> loading}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="suggestedHashtags">
+  {{#each suggestedHashtags}}
+    <a id="add-hashtag" class="ui blue large label">#{{name}}</a>  
+  {{/each}}
+</template>
+
+<template name="hashtagSearch">
+  <div class="ui search">
+    <div class="ui fluid icon large input">
       <input class="prompt" type="text" placeholder="#hashtags...">
       <i class="search icon"></i>
     </div>
     <div class="results"></div>
   </div>
+</template>
 
-	{{>selectedHashtags}}
+<template name="selectedHashtags">
+	{{#each selectedHashtags}}
+		<a id="remove-hashtag" class="ui blue large label" >
+  		{{this}}
+  		<i  class="delete icon"></i>
+		</a>	
+	{{/each}}
+</template>
 
+<template name="hashtagGraph">
   {{#with hashtagInfo}}
     <ul>
       <li>Total time : {{totalTime}}</li>
@@ -20,21 +50,4 @@
       <li>Average time : {{avgTime}}</li>
     </ul>
   {{/with}}
-
-</template>
-
-<template name="selectedHashtags">
-	{{#each selectedHashtags}}
-		<a class="ui label">
-  		{{this}}
-  		<i id="remove-hashtag" class="delete icon"></i>
-		</a>	
-	{{/each}}
-</template>
-
-<template name="suggestedHashtags">
-  <h1 class="ui header">Suggested hashtags</h1>
-  {{#each suggestedHashtags}}
-    <a id="add-hashtag" class="ui label">#{{name}}</a>  
-  {{/each}}
 </template>

@@ -1,7 +1,27 @@
 var selectedHashtagArr = [];
 Session.setDefault('selectedHashtags', selectedHashtagArr);
 
-// helpers
+// Template.hashtagSearch.onCreated(function () {
+//   this.autorun(() => {
+//     //this.subscribe('timestamp.stat');
+//     this.subscribe('hashtag');
+
+//   });
+// });
+
+// Template.suggestedHashtags.onCreated(function () {
+//   this.autorun(() => {
+//     //this.subscribe('timestamp.stat');
+//     this.subscribe('hashtag');
+//   });
+// });
+
+// Template.hashtagGraph.onCreated(function () {
+//   this.autorun(() => {
+//     this.subscribe('timestamp.stat');
+//     //this.subscribe('hashtag');
+//   });
+// });
 
 Template.hashtag.onCreated(function () {
   this.autorun(() => {
@@ -10,40 +30,50 @@ Template.hashtag.onCreated(function () {
   });
 });
 
-Template.hashtag.onRendered(function () {
 
-  let hashtags = _.map(Hashtag.find({count: {$gte: 1} }).fetch(), function (tag) {
-    tag.name = '#' + tag.name;
-    return tag;
-  });
 
-  $('.ui.search').search({
-    source: hashtags,
-    fields: {
-      title           : 'name'
-    },
-    searchFields: ['name'],
-    searchFullText: true,
-    onSelect : function(item) {
-      let addHashtag = item.name;
-      if (addHashtag.charAt(0) === '#')
-        addHashtag = addHashtag.slice(1);
-      // Add selected hashtag to Session selectedHashtags. (Check existence of hashtag fist)
-      let selectedHashtagArr = Session.get('selectedHashtags');
-      if (selectedHashtagArr.indexOf(addHashtag) === -1) {
-        selectedHashtagArr.push(addHashtag);
-        Session.set('selectedHashtags', selectedHashtagArr);
-      } else {
-        return;
-      }
+Template.hashtagSearch.onRendered(function () {
 
+  this.autorun(() => {
+    if (this.subscriptionsReady()) {
+      // body...
+      const hashtagDB = _.map(Hashtag.find({ count: { $gte: 1 } }).fetch(), function (tag) {
+        tag.name = '#' + tag.name;
+        return tag;
+      });
+
+      const options = {
+        source: hashtagDB,
+        fields: {
+          title: 'name'
+        },
+        searchFields: ['name'],
+        searchFullText: true,
+        onSelect: function (item) {
+          let addHashtag = item.name;
+          if (addHashtag.charAt(0) === '#')
+            addHashtag = addHashtag.slice(1);
+          // Add selected hashtag to Session selectedHashtags. (Check existence of hashtag fist)
+          let selectedHashtagArr = Session.get('selectedHashtags');
+          if (selectedHashtagArr.indexOf(addHashtag) === -1) {
+            selectedHashtagArr.push(addHashtag);
+            Session.set('selectedHashtags', selectedHashtagArr);
+          } else {
+            return;
+          }
+        }
+      };
+
+      $('.ui.search').search(options);
+
+      console.log('Initialized Search');
     }
-  }, );
+  });
 
 });
 
 
-Template.hashtag.helpers ({	
+Template.hashtagGraph.helpers ({	
   hashtagInfo: function () {
     let result = {
       totalTime: 'None',
@@ -131,7 +161,7 @@ Template.suggestedHashtags.events ({
   "click #add-hashtag": function (event) {
     event.preventDefault();
 
-    let selectedHashtag = event.currentTarget.innerText.trim();
+    let selectedHashtag = event.currentTarget.textContent.trim();
     if(selectedHashtag.charAt(0) === '#') 
       selectedHashtag = selectedHashtag.slice(1);
     
@@ -140,9 +170,10 @@ Template.suggestedHashtags.events ({
       selectedHashtagArr.push(selectedHashtag);
       Session.set('selectedHashtags', selectedHashtagArr);
     } else {
-      return;
+      
     }
-  },
+    return false;
+  }
 
 });
 
@@ -150,16 +181,18 @@ Template.suggestedHashtags.events ({
 
 
 
-Template.hashtag.events ({
+Template.selectedHashtags.events ({
   "click #remove-hashtag": function (event) {
     event.preventDefault();
-    let removeHashtag = event.currentTarget.previousSibling.wholeText.trim();
+
+    let removeHashtag = event.currentTarget.textContent.trim();
     if(removeHashtag.charAt(0) === '#')
       removeHashtag = removeHashtag.slice(1);
     // Remove the hashtag from Session.
     let selectedHashtagArr = Session.get('selectedHashtags');
     selectedHashtagArr = _.without(selectedHashtagArr, removeHashtag);
     Session.set('selectedHashtags', selectedHashtagArr);
+    return false;
   }
   
 });

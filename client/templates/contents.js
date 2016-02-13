@@ -3,7 +3,9 @@ const isEditMode = 'isEditMode';
 Session.setDefault(isEditMode, false);
 Session.setDefault('removeItem', null);
 Session.setDefault('removeTemplate', null);
-Session.setDefault('loadedItem', 3);
+Session.setDefault('loadedItemCount', 0);
+Session.setDefault('loadableItemCount', 3);
+
 
 
 var removeTemplate = null;
@@ -11,8 +13,9 @@ var removeTemplate = null;
 
 Template.contents.onCreated(function () {
   this.autorun(() => {
-    this.subscribe('timestamp.item', Session.get('loadedItem'));
+    this.subscribe('timestamp.item', Session.get('loadableItemCount'));
   });
+
 });
 
 Template.contents.helpers ({
@@ -22,6 +25,10 @@ Template.contents.helpers ({
     // No need to find this user 
     // because ti already filtered with publish func on server.js
     let card = Timestamp.find({}, {sort: {inTime: -1}}).fetch(); 
+    
+    // Set loadable item count for loadMore button
+    Session.set('loadedItemCount', card.length);
+
 
     // Get data & change format
     card.forEach(function (item) {
@@ -45,6 +52,13 @@ Template.contents.helpers ({
   },
   date: function () {
     return moment().format('LL');
+  }, 
+  canLoadMore: function () {
+    // Return true if there are not loaded items.
+    if (Session.get('loadedItemCount') >= Session.get('loadableItemCount'))
+      return true;
+    else
+      return false;
   }
 
 });
@@ -170,7 +184,7 @@ Template.contents.events ({
     // -----------------------  
     "click #loadMoreItems": function (event) {
       event.preventDefault();
-      Session.set('loadedItem', Session.get('loadedItem') + 3);
+      Session.set('loadableItemCount', Session.get('loadableItemCount') + 3);
     }
 
 

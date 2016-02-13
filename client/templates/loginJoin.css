@@ -4,7 +4,20 @@ div.ui.middle.aligned.center.aligned.grid {
 }
 
 html.ios, html.ios body{
-  height: 100%!important;
+  /* To prevent height diminished when logout */
+  /*height: 100%!important;*/
+
+}
+
+body {
+  /* To prevent gray effect when click event fired on div.coulmn */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+
+}
+
+html.touch *:hover {
+  /* To eliminate hover in mobile */
+  /*pointer-events: none !important;*/
 }
 
 /*

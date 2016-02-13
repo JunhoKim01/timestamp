@@ -1,14 +1,14 @@
 // session
-const tabStatus = 'tabStatus';
-Session.setDefault(tabStatus, 'contents'); // home or profile
+
+Session.setDefault('tabStatus', 'contents'); // home or profile
 
 Template.app.helpers ({
 	getTabStatus: function () { 
-		return Session.get(tabStatus); 
+		return Session.get('tabStatus'); 
 	}
 });
 
-Template.menubar.onCreated(function () {
+Template.menubar.onRendered(function () {
 	// initializing dropdown menu
 	$('.ui.dropdown.item').dropdown();  
 });
@@ -22,9 +22,9 @@ Template.menubar.helpers ({
 	// username: function() {
 	// 	return Meteor.user().username;
 	// }
-	getTabStatus: function () { 
-		return Session.get(tabStatus); 
-	}
+	// getTabStatus: function () { 
+	// 	return Session.get('tabStatus'); 
+	// }
 
 });
 
@@ -33,29 +33,37 @@ Template.menubar.helpers ({
 Template.menubar.events ({
 
 	// -----------------------
-  	// Menubar buttons
+  	// Pages
   	// -----------------------
 
   	"click #home": function (event) {
-  		Session.set(tabStatus, 'contents');
+  		event.preventDefault();
+  		// console.log(event);
+  		// alert('home clicked');
+  		Session.set('tabStatus', 'contents');
   	},
-  	// "click #profile": function(event) {
-  	// 	Session.set(tabStatus,'profile');
-  	// 	Session.set('isEditMode',false);
-  	// },
   	"click #hashtag": function (event) {
-  		Session.set(tabStatus, 'hashtag');
+  		event.preventDefault();
+  		
+  		// alert('hashtag clicked');
+  		Session.set('tabStatus', 'hashtag');
   		Session.set('isEditMode', false);
+  		Session.set('loadableItemCount', 3);
   	},
+  	// "click .ui.menu": function (event) {
+  	// 	console.log('(' + event.screenX + ', ' + event.screenY + ')');
+  	// },
 	
 	// -----------------------
-  	// Dropdown buttons
+  	// Dropdown button
   	// -----------------------
 
 	"click #toggle-edit": function (event) {
+		event.preventDefault();
 		Session.set('isEditMode',!Session.get('isEditMode'));
 	},
 	"click #logout": function(event) {
+		event.preventDefault();
 		Meteor.logout(function() {
 			Router.go('splash');
 		});

@@ -27,7 +27,10 @@ Template.card.events ({
 		    duration   : '600ms',
 		    onComplete : function() {
 		    	// remove this item when scale transition is completed
-		    	Meteor.call("removeItem", self);
+		    	Meteor.call("removeItem", self, function () {
+            //Decrease seenable item count by 1. (Because 1 card just removed) 
+		        //Session.set('loadableItemCount', Session.get('loadableItemCount') - 1);
+		    	});
 		    }
 		});
 	},
@@ -102,9 +105,6 @@ Template.card.events ({
 	},
 	"click #remove-hashtag":function (event) {
 		event.preventDefault();
-		//console.log("this : " + Template.parentData(0));
-		//console.log(event.currentTarget.previousSibling.wholeText.trin());
-		//let removeHashtag = event.currentTarget.parentNode.innerText.trim();
 		let removeHashtag = event.currentTarget.previousSibling.wholeText.trim();
 
 		if (removeHashtag.charAt(0) === '#' ) {
