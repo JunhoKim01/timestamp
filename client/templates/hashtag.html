@@ -3,14 +3,11 @@
 
   <div class="ui one column centered stackable grid">
     {{#if Template.subscriptionsReady}}
-      <div class="column">{{>hashtagSearch}}</div>
-      <div class="column">
-        <!-- Suggested hashtags :  -->
-        {{>suggestedHashtags}}
-      </div>
-      <div class="column">{{>selectedHashtags}}</div>
-      <div class="column">{{>hashtagGraph}}</div>
-      <div class="column">test</div>
+      {{>hashtagSearch}}
+      {{>selectedConditions}}
+      {{>suggestedHashtags}}
+      {{>selectedHashtags}}
+      {{>hashtagGraph}}
     {{else}}
       {{> loading}}
     {{/if}}
@@ -18,36 +15,58 @@
 </template>
 
 <template name="suggestedHashtags">
-  {{#each suggestedHashtags}}
-    <a id="add-hashtag" class="ui blue large label">#{{name}}</a>  
-  {{/each}}
+  <div class="column">
+    {{#each suggestedHashtags}}
+      <a id="add-hashtag" class="ui blue large label">#{{name}}</a>  
+    {{/each}}
+  </div>
 </template>
 
 <template name="hashtagSearch">
-  <div class="ui search">
-    <div class="ui fluid icon large input">
-      <input class="prompt" type="text" placeholder="#hashtags...">
-      <i class="search icon"></i>
+  <div class="column">
+    <div class="ui search">
+      <div class="ui fluid icon large input">
+        <input class="prompt" type="text" placeholder="#hashtags...">
+        <i class="search icon"></i>
+      </div>
+      <div class="results"></div>
     </div>
-    <div class="results"></div>
   </div>
 </template>
 
 <template name="selectedHashtags">
+  <div class="column">
 	{{#each selectedHashtags}}
 		<a id="remove-hashtag" class="ui blue large label" >
   		{{this}}
   		<i  class="delete icon"></i>
 		</a>	
 	{{/each}}
+  </div>
 </template>
 
+<template name="selectedConditions">
+  <div class="column">
+    {{#each selectedConditions}}
+      {{#if isSelected this}}
+        <a id="remove-condition" class="ui teal large label">{{this}}</a>  
+      {{else}}
+        <a id="add-condition" class="ui large label">{{this}}</a>  
+      {{/if}}
+        
+    {{/each}}
+  </div>
+</template>
+
+
 <template name="hashtagGraph">
-  {{#with hashtagInfo}}
-    <ul>
-      <li>Total time : {{totalTime}}</li>
-      <li>Total count : {{count}}</li>
-      <li>Average time : {{avgTime}}</li>
-    </ul>
-  {{/with}}
+  <div class="column">
+    {{#with hashtagInfo}}
+      <ul>
+        <li>Total time : {{totalTime}}</li>
+        <li>Total count : {{count}}</li>
+        <li>Average time : {{avgTime}}</li>
+      </ul>
+    {{/with}}
+  </div>
 </template>

@@ -1,4 +1,4 @@
-
+mySession = new mySessionClass();
 
 if (Meteor.isClient) {
 
@@ -14,6 +14,12 @@ if (Meteor.isClient) {
     
     moment.locale(locale);
     Session.set('locale', locale);
+
+
+    // Session 
+    
+
+
   });
   
   

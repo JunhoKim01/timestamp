@@ -40,7 +40,8 @@ Template.contents.helpers ({
           item.workingTime = moment.preciseDiff(tempInTime, tempOutTime, Session.get('locale'));
         }
 
-        item.date = tempInTime.format('LL');
+        // item.date = tempInTime.format('YYYY MMMM Do ddd');
+        item.date = tempInTime.format('LL') + ' (' + tempInTime.format('ddd') + ')';
         item.inTime = tempInTime.format('a h:mm');
 
         item.hashtag.forEach(function (currentValue, index, array) {
