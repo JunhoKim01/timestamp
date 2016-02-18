@@ -1,0 +1,39 @@
+<template name="selectedHashtags">
+  <div class="two column center aligned row">
+
+	{{#with selectedLeftHashtag}}  	
+  <div class="center aligned  column">
+		<a id="remove-hashtag" class="ui yellow huge label" >
+			{{this}}
+      <i  class="delete icon"></i>
+		</a>
+  </div>
+  <p></p>
+  <p></p>
+  <p></p>
+  {{/with}}
+
+	{{#with selectedRightHashtag}}  	
+  <div class="ui vertical divider"> and </div>
+  <div class="center aligned column">
+    
+    <a id="remove-hashtag" class="ui yellow huge label" >
+      {{this}}
+      <i  class="delete icon"></i>
+    </a>
+  </div>
+  <p></p>
+  <p></p>
+  <p></p>
+	{{/with}}
+
+</div>
+
+	<!-- {{#each selectedHashtags}}
+		<a id="remove-hashtag" class="ui blue large label" >
+  		{{this}}
+  		<i  class="delete icon"></i>
+		</a>	
+	{{/each}} -->
+  
+</template>

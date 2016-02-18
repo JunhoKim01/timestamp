@@ -1,0 +1,23 @@
+<template name="hashtag">
+	<div id="spacer"></div>
+
+  <div class="ui one column centered grid container">
+    {{#if Template.subscriptionsReady}}
+      {{>hashtagSearch}}
+      {{>selectedConditions}}
+      {{>suggestedHashtags}}
+      <div class="column"></div>
+      {{>selectedHashtags}}
+      {{>hashtagGraph}}
+    {{else}}
+      {{> loading}}
+    {{/if}}
+  </div>
+</template>
+
+
+
+
+
+
+

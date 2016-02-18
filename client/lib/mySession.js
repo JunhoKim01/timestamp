@@ -23,13 +23,20 @@ mySessionClass = class MySession {
   }
   // Insert a value to selected session variable which is an array (push & set)
   // value: number, string
-  insert (key, value) {
+  insert (key, value, MAX) {
     // Input validation
     if(!this._isValid(key, value))
       throw new Meteor.myFunctions.clientException('Invalid key or value', 101);
 
+
+
     // Get current array value
     let arr = Session.get(key);
+    // Check maximum insterable number
+    if (MAX && arr.length >= MAX)
+      return false // Should emits messages
+
+
     if (arr && arr.constructor === Array) {
       if (arr.indexOf(value) === -1 ) {
         // Push the value to array only when there is no same value

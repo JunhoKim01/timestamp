@@ -1,0 +1,13 @@
+
+<template name="selectedConditions">
+  <div class="column">
+    {{#each selectedConditions}}
+      {{#if isSelected this}}
+        <a id="remove-condition" class="ui teal large label">{{this}}</a>  
+      {{else}}
+        <a id="add-condition" class="ui large label">{{this}}</a>  
+      {{/if}}
+        
+    {{/each}}
+  </div>
+</template>
