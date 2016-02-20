@@ -3,6 +3,12 @@
 	background-color: transparent;
 }
 
+
+#spacer {
+  padding-top: 50px;
+}
+
+
 .ui.form textarea {
     resize: none;
     padding-top: 0px;

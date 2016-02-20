@@ -41,6 +41,7 @@ Template.menubar.events ({
   		// console.log(event);
   		// alert('home clicked');
   		Session.set('tabStatus', 'contents');
+      
   	},
   	"click #hashtag": function (event) {
   		event.preventDefault();
@@ -49,6 +50,7 @@ Template.menubar.events ({
   		Session.set('tabStatus', 'hashtag');
   		Session.set('isEditMode', false);
   		Session.set('loadableItemCount', 3);
+
   	},
   	// "click .ui.menu": function (event) {
   	// 	console.log('(' + event.screenX + ', ' + event.screenY + ')');
@@ -61,6 +63,11 @@ Template.menubar.events ({
 	"click #toggle-edit": function (event) {
 		event.preventDefault();
 		Session.set('isEditMode',!Session.get('isEditMode'));
+	},
+	"click #settings": function (event) {
+		event.preventDefault();
+		Session.set('tabStatus', 'settings');
+    Session.set('editUsername', false);
 	},
 	"click #logout": function(event) {
 		event.preventDefault();

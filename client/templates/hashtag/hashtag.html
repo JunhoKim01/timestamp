@@ -1,10 +1,10 @@
 <template name="hashtag">
 	<div id="spacer"></div>
 
-  <div class="ui one column centered grid container">
+  <div class="ui one column centered stackable grid">
     {{#if Template.subscriptionsReady}}
       {{>hashtagSearch}}
-      {{>selectedConditions}}
+      <!-- {{>selectedConditions}} -->
       {{>suggestedHashtags}}
       <div class="column"></div>
       {{>selectedHashtags}}
