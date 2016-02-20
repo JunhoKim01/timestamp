@@ -88,7 +88,8 @@ Template.loginJoin.events ({
         email: email,
         password: password,
         profile: {
-          name:username
+          name:username,
+          defaultHashtag:[]
         }
       }, function(error) {
         if (error) {

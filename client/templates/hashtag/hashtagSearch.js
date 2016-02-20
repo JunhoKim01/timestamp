@@ -2,11 +2,12 @@ Template.hashtagSearch.onRendered(function () {
 
   this.autorun(() => {
     if (this.subscriptionsReady()) {
-      // body...
-      const hashtagDB = _.map(Hashtag.find({ count: { $gte: 1 } }).fetch(), function (tag) {
-        tag.name = '#' + tag.name;
-        return tag;
-      });
+      // Make local hashtag
+      const hashtagDB = Hashtag.find({ count: { $gte: 1 } }).fetch();
+      // const hashtagDB = _.map(Hashtag.find({ count: { $gte: 1 } }).fetch(), function (tag) {
+      //   tag.name = '#' + tag.name;
+      //   return tag;
+      // });
 
       const options = {
         source: hashtagDB,
@@ -17,8 +18,8 @@ Template.hashtagSearch.onRendered(function () {
         searchFullText: true,
         onSelect: function (item) {
           let addHashtag = item.name;
-          if (addHashtag.charAt(0) === '#')
-            addHashtag = addHashtag.slice(1);
+          // if (addHashtag.charAt(0) === '#')
+          //   addHashtag = addHashtag.slice(1);
           // Add selected hashtag to Session selectedHashtags. (Check existence of hashtag fist)
           mySession.insert('selectedHashtags', addHashtag);
           // let selectedHashtagArr = Session.get('selectedHashtags');

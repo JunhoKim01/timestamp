@@ -19,6 +19,7 @@
     <button class="in">In</button>
     <button class="out">Out</button>
     <button class="resetRecords">Reset record</button>
+    <button class="resetDefaultHashtag">Reset defaut hashtag</button>
   
   <br/><br/>
 
@@ -32,6 +33,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Default hashtags</th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +42,7 @@
         <td>{{_id}}</td>
         <td>{{profile.name}}</td>
         <td>{{emails.[0].address}}</td>
+        <td>{{profile.defaultHashtag}}</td>
       </tr>
     {{/each}}
   </tbody>

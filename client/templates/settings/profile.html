@@ -1,0 +1,35 @@
+<template name="profile">
+	<div class="column">
+	  <h2 class="ui header">Profile</h2>
+	  <div class="ui relaxed large list">
+	    <div class="item">
+	      <i class="large middle aligned user icon"></i>
+	      <div class="content">
+	        {{#if editUsername}}
+
+	          <div class="ui small input">
+	            <input id="input-username" type="text" value="{{userName}}"> <a class="item" id="done-username"> Done </a>
+	          </div>
+	        {{else}}
+	          <div class="header">Name</div>
+	          {{userName}} <a class="item" id="edit-username"><i class="edit icon"></i></a>
+	        {{/if}}
+	      </div>
+	    </div>
+	    <div class="item">
+	      <i class="large middle aligned mail icon"></i>
+	      <div class="content">
+	        <div class="header">E-mail address (login ID)</div>
+	        {{userEmail}}
+	      </div>
+	    </div>
+	    <!-- <div class="item">
+	      <i class="undo icon"></i>
+	      <div class="content">
+	        Click <a class="item" id="reset-password">here</a> to reset password
+	      </div>
+	    </div> -->
+	  </div>
+	</div>
+
+</template>

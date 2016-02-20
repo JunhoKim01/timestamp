@@ -44,9 +44,9 @@ Template.contents.helpers ({
         item.date = tempInTime.format('LL') + ' (' + tempInTime.format('ddd') + ')';
         item.inTime = tempInTime.format('a h:mm');
 
-        item.hashtag.forEach(function (currentValue, index, array) {
-          array[index] = '#' + currentValue;
-        });
+        // item.hashtag.forEach(function (currentValue, index, array) {
+        //   array[index] = '#' + currentValue;
+        // });
       }); 
 
     return card;
@@ -68,16 +68,18 @@ Template.contents.helpers ({
 
 Template.contents.events ({
   "click .remove": function (event) {
+
     event.preventDefault();
 
-        //Meteor.call("removeItem");
-      },
 
-      "click .edit": function (event) {
-        event.preventDefault();
+      //Meteor.call("removeItem");
+    },
 
-        //Meteor.call("editItem");      
-      },
+    "click .edit": function (event) {
+      event.preventDefault();
+
+      //Meteor.call("editItem");      
+    },
 
     // -----------------------
     // Check in & out buttons
@@ -87,51 +89,65 @@ Template.contents.events ({
     'click #add-newCheckIn': function (event) {
       event.preventDefault();
 
-        const checkInTime = Date.now(); // javascript date now
-        const checkOutTime = null; 
-        const text = $('#add-newCheckText').val().trim();
-        //let newHashtag = text;
-        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
-        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
-      
-        // Extract hashtag from text & remove #
-        const hashtagArr = _.map(text.match(regex), function (hashtag) {
-          if( hashtag.charAt(0) === '#' )
-            hashtag = hashtag.slice(1);
-          return hashtag;
-        }); 
-        console.log(hashtagArr);
-        Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
+      const checkInTime = Date.now(); // javascript date now
+      const checkOutTime = null; 
+      const text = $('#add-newCheckText').val().trim();
+      // When there is no text
+      if (text === '') { 
+        Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text,[]);  
+        // Clear the textarea & set default hashtag\
+        $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+        return;  
+      }
 
-        $('#add-newCheckText').val(''); // Clear the textarea
-      },
+      // Extract hashtag from text
+      const hashtagArr = myHashtag.find(text);
+      // Method call
+      Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
+      // Clear the textarea & set default hashtag
+      $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+    },
+
     // Create new check-in & check out time at once.
     'click #add-newCheckOut': function (event) {
       event.preventDefault();
 
-        const checkOutTime = Date.now(); // Javascript date now
-        let checkInTimeObj = new Date(checkOutTime); // Default (work) checkInTime 
-        checkInTimeObj.setHours(9, 0, 0, 0); // Set checkInTime`s hours/minutes/seconds/ms to 09:00:00:000 (default)
-        const checkInTime = checkInTimeObj.getTime();
+      const checkOutTime = Date.now(); // Javascript date now
+      let checkInTimeObj = new Date(checkOutTime); // Default (work) checkInTime 
 
-        const text = $('#add-newCheckText').val().trim();
-        //let newHashtag = text;
-        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
-        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
-        
-        // Extract hashtag from text & remove #
-        const hashtagArr = _.map(text.match(regex), function (hashtag) {
-          if( hashtag.charAt(0) === '#' )
-            hashtag = hashtag.slice( 1 );
-          return hashtag;
-        }); 
+      ///
+      // Have bug here : Default check in time should be prior to check out time
+      // 
 
-        console.log(hashtagArr);
-        Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
 
-        $('#add-newCheckText').val(''); // Clear the textarea
-      },
 
+
+
+
+      
+
+      checkInTimeObj.setHours(9, 0, 0, 0); // Set checkInTime`s hours/minutes/seconds/ms to 09:00:00:000 (default)
+      
+
+      const checkInTime = checkInTimeObj.getTime();
+
+      const text = $('#add-newCheckText').val().trim();
+      // When there is no text
+      if (text === '') { 
+        Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text,[]);  
+        // Clear the textarea
+        $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+        return;  
+      }
+
+      // Extract hashtag from text
+      const hashtagArr = myHashtag.find(text);
+      //console.log(hashtagArr);
+      // Method call
+      Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
+      // Clear the textarea & set default hashtag
+      $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+    },
 
     // Add check-out log to already exist card. 
     // Cf. There is no 'add-existingCheckIn' because check-in time will always be set when new card
@@ -139,24 +155,19 @@ Template.contents.events ({
     'click #add-existingCheckOut': function (event) {
       event.preventDefault();
       const self = this;
-        //console.log(self);
-        const checkOutTime = Date.now(); // javascript date now
-        const text = self.text.trim();
-        //let newHashtag = text;
-        const regex = /#[가-힣a-zㄱ-ㅎ\d][가-힣a-zㄱ-ㅎ\d\_\?]*/ig; // Regexp for English/Korean hashtag
-        // const regex = /(^|)*#(.+?)(?=[\s#.,:)]|$)/ig; // Another regextp that matches more launguage but even '##''
-        
-        // Extract hashtag from text & remove #
-        const hashtagArr = _.map(text.match(regex), function (hashtag) {
-          if( hashtag.charAt(0) === '#' )
-            hashtag = hashtag.slice( 1 );
-          return hashtag;
-        }); 
-        console.log(hashtagArr);
-        Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
+      const checkOutTime = Date.now(); // javascript date now
+      const text = self.text.trim();
 
-        //self.// Set the textarea non editable
-      },
+      // When there is no text
+      if (text === '') {
+        Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, []);
+      } 
+
+      // Extract hashtag from text
+      const hashtagArr = myHashtag.find(text);
+      // Method call
+      Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
+    },
 
 
 

@@ -29,6 +29,13 @@ Template.admin.events ({
 
     Meteor.call("resetHashtags"); // remove all hashtags
   },
+  "click .resetDefaultHashtag": function (event) {
+    event.preventDefault();
+
+    Meteor.call("resetDefaultHashtag"); // remove all hashtags
+  },
+  
+
   "click .resetUsers": function (event) {
     event.preventDefault();
 

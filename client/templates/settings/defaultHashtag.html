@@ -1,0 +1,30 @@
+<template name="defaultHashtag">
+	<div class="column">
+	  <h2 class="ui header">Default hashtags</h2>
+
+    <!-- <div class="ui left icon input">
+      <input type="text" placeholder="Type hashtag...">
+      <i class="plus icon"></i>
+      <a class="item" id="add-defaulthashtag"> Add </a>
+    </div> -->
+
+    <div class="ui search">
+      <div class="ui icon large input">
+        <input class="prompt" type="text" placeholder="#hashtags...">
+        <i class="search icon"></i>
+      </div>
+      <div class="results"></div>
+      <a class="item" id="add-defaulthashtag"> Add </a>
+    </div>
+
+
+    {{#each defaultHashtags}}
+      <a id="remove-defaulthashtag" class="ui blue large label">{{this}}<i class="delete icon"></i></a>  
+    {{/each}}
+    
+    <!-- <a class="item" id="add-hashtag">
+      <i class="add square icon"></i>
+      Add hashtag
+    </a> -->
+	</div>
+</template>

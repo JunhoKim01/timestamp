@@ -1,5 +1,12 @@
 
 
+Template.inputCard.onRendered(function () {
+
+	const hashtagArr = Meteor.user().profile.defaultHashtag;
+	$('#add-newCheckText').val(hashtagArr);
+
+});
+
 Template.card.helpers({
 	isEditMode: function () {
 		return Session.get('isEditMode');
@@ -52,64 +59,64 @@ Template.card.events ({
 		// 	console.log(template.$('.ui.modal'));
 
 		let self = this;
-		$('.ui.modal')
-		.modal({
-		    closable  : true,
-		    blurring  : true,
-		    onHidden  : function() {
-		    	$('#input-hashtag').attr("placeholder", "Type new hashtag...");
-		    },
-		    onApprove : function() {
-		    	// go ahead
-		    	//console.log(this);
-		    	let newHashtag = $('#input-hashtag').val().trim();
-				let re = /#[가-힣a-z\d][가-힣a-z\d]*/;
+		// $('.ui.modal')
+		// .modal({
+		//     closable  : true,
+		//     blurring  : true,
+		//     onHidden  : function() {
+		//     	$('#input-hashtag').attr("placeholder", "Type new hashtag...");
+		//     },
+		//     onApprove : function() {
+		//     	// go ahead
+		//     	//console.log(this);
+		//     	let newHashtag = $('#input-hashtag').val().trim();
+		// 		let re = /#[가-힣a-z\d][가-힣a-z\d]*/;
 
-				//if(!re.test("#" + newHashtag) || newHashtag == "") {
-				if(newHashtag == "") {
-					// hashtag not found
-					$('#input-hashtag').attr("placeholder", "Type new hashtag, please");
-					$('#input-hashtag').val("");	
+		// 		//if(!re.test("#" + newHashtag) || newHashtag == "") {
+		// 		if(newHashtag == "") {
+		// 			// hashtag not found
+		// 			$('#input-hashtag').attr("placeholder", "Type new hashtag, please");
+		// 			$('#input-hashtag').val("");	
 
-					$('.ui.modal')
-		    		.transition({
-		    			animation : 'shake',
-					    duration  : 750
-					  });
+		// 			$('.ui.modal')
+		//     		.transition({
+		//     			animation : 'shake',
+		// 			    duration  : 750
+		// 			  });
 		    		
-		    		return false;
+		//     		return false;
 
-				} else {
-		    		// check validation 
+		// 		} else {
+		//     		// check validation 
 
-		    		if (newHashtag.length > 26 ) {
-		    			$('#input-hashtag').attr("placeholder", "It should be under 26 characters");
-		    			$('#input-hashtag').val("");
+		//     		if (newHashtag.length > 26 ) {
+		//     			$('#input-hashtag').attr("placeholder", "It should be under 26 characters");
+		//     			$('#input-hashtag').val("");
 
-		    			return false;
-		    		}
-		    		//newHashtag = newHashtag.split(' ', 1);
-		    		//let input = re.exec('#' + newHashtag)[0];
-		    		//console.log(newHashtag);
-		    		//console.log(input.slice(1));	
+		//     			return false;
+		//     		}
+		//     		//newHashtag = newHashtag.split(' ', 1);
+		//     		//let input = re.exec('#' + newHashtag)[0];
+		//     		//console.log(newHashtag);
+		//     		//console.log(input.slice(1));	
 
-		    		Meteor.call("newHashtag", self._id, newHashtag, function() {
-			    		$('#input-hashtag').val("");
-			    	});
-				}
+		//     		Meteor.call("newHashtag", self._id, newHashtag, function() {
+		// 	    		$('#input-hashtag').val("");
+		// 	    	});
+		// 		}
 
 
-		    }
-		})
-		.modal('show');  
+		//     }
+		// })
+		// .modal('show');  
 	},
 	"click #remove-hashtag":function (event) {
 		event.preventDefault();
 		let removeHashtag = event.currentTarget.previousSibling.wholeText.trim();
 
-		if (removeHashtag.charAt(0) === '#' ) {
-			removeHashtag = removeHashtag.slice( 1 );
-		}
+		// if (removeHashtag.charAt(0) === '#' ) {
+		// 	removeHashtag = removeHashtag.slice( 1 );
+		// }
 		
 		Meteor.call("removeHashtag", Template.parentData(0)._id, removeHashtag);		
 	}

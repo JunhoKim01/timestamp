@@ -2,25 +2,25 @@ Template.selectedHashtags.helpers ({
 	
 	selectedHashtags: function () {
 		let hashtagArr = Session.get('selectedHashtags');
-		hashtagArr.forEach(function (currentValue, index, array) {
-			array[index] = '#' + currentValue;
-		});
+		// hashtagArr.forEach(function (currentValue, index, array) {
+		// 	array[index] = '#' + currentValue;
+		// });
 
     return hashtagArr;
 	},
   selectedLeftHashtag: function () {
     let hashtagArr = Session.get('selectedHashtags');
-    hashtagArr.forEach(function (currentValue, index, array) {
-      array[index] = '#' + currentValue;
-    });
+    // hashtagArr.forEach(function (currentValue, index, array) {
+    //   array[index] = '#' + currentValue;
+    // });
 
     return hashtagArr[0];
   },
   selectedRightHashtag: function () {
     let hashtagArr = Session.get('selectedHashtags');
-    hashtagArr.forEach(function (currentValue, index, array) {
-      array[index] = '#' + currentValue;
-    });
+    // hashtagArr.forEach(function (currentValue, index, array) {
+    //   array[index] = '#' + currentValue;
+    // });
 
     return hashtagArr[1];
   },
@@ -43,8 +43,8 @@ Template.selectedHashtags.events ({
     event.preventDefault();
 
     let removeHashtag = event.currentTarget.textContent.trim();
-    if(removeHashtag.charAt(0) === '#')
-      removeHashtag = removeHashtag.slice(1);
+    // if(removeHashtag.charAt(0) === '#')
+    //   removeHashtag = removeHashtag.slice(1);
     // Remove the hashtag from Session.
     mySession.remove('selectedHashtags', removeHashtag);
     // let selectedHashtagArr = Session.get('selectedHashtags');

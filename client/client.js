@@ -1,4 +1,8 @@
+
+// Class variable definition
 mySession = new mySessionClass();
+myHashtag = new myHashtagClass();
+
 
 if (Meteor.isClient) {
 

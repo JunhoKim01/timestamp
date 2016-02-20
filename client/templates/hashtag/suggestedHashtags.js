@@ -25,8 +25,8 @@ Template.suggestedHashtags.events ({
 
     let selectedHashtag = event.currentTarget.textContent.trim();
     //addHashtag();
-    if(selectedHashtag.charAt(0) === '#') 
-      selectedHashtag = selectedHashtag.slice(1);
+    // if(selectedHashtag.charAt(0) === '#') 
+    //   selectedHashtag = selectedHashtag.slice(1);
     
     mySession.insert('selectedHashtags', selectedHashtag, MAX_SELECTED_HASHTAGS);
     // let selectedHashtagArr = Session.get('selectedHashtags');
