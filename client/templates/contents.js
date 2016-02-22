@@ -1,14 +1,6 @@
-// session
-const isEditMode = 'isEditMode';
-Session.setDefault(isEditMode, false);
-Session.setDefault('removeItem', null);
-Session.setDefault('removeTemplate', null);
-Session.setDefault('loadedItemCount', 0);
-Session.setDefault('loadableItemCount', 3);
-
-
-
-var removeTemplate = null;
+//Session.setDefault('removeItem', null);
+//Session.setDefault('removeTemplate', null);
+//var removeTemplate = null;
 
 
 Template.contents.onCreated(function () {
@@ -120,14 +112,11 @@ Template.contents.events ({
       // 
 
 
+      // Set hours as defaultHour:defaultMinute:00:000
+      const defaultHour = Meteor.user().profile.defaultInTimeHour || 9;
+      const defaultMinute = Meteor.user().profile.defaultInTimeMinute || 0;
+      checkInTimeObj.setHours(defaultHour, defaultMinute, 0, 0);
 
-
-
-
-      
-
-      checkInTimeObj.setHours(9, 0, 0, 0); // Set checkInTime`s hours/minutes/seconds/ms to 09:00:00:000 (default)
-      
 
       const checkInTime = checkInTimeObj.getTime();
 

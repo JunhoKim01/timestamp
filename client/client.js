@@ -20,8 +20,8 @@ if (Meteor.isClient) {
     Session.set('locale', locale);
 
 
-    // Session 
-    
+    // Session default set
+    initSession();
 
 
   });

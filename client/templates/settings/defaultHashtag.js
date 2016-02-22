@@ -1,7 +1,6 @@
 Template.defaultHashtag.onCreated (function () {
 
   this.autorun(() => {
-    
     if (this.subscriptionsReady()) {
       // Make local hashtag
       const hashtagDB = Hashtag.find({ count: { $gte: 1 } }).fetch();
@@ -12,9 +11,7 @@ Template.defaultHashtag.onCreated (function () {
 
       const options = {
         source: hashtagDB,
-        fields: {
-          title: 'name'
-        },
+        fields: {title: 'name'},
         searchFields: ['name'],
         searchFullText: true,
         onSelect: function (item) {
@@ -23,21 +20,21 @@ Template.defaultHashtag.onCreated (function () {
             Meteor.call('addDefaultHashtag', Meteor.userId(), addHashtag);
           else 
             return false;
-
         }
       };
 
+      // Initialize search
       $('.ui.search').search(options);
+
     }
   });
 });
 
 Template.defaultHashtag.helpers ({
   "defaultHashtags": function () {
-
     return Meteor.user().profile.defaultHashtag;
-
   },
+
 });
 
 
@@ -61,17 +58,16 @@ Template.defaultHashtag.events ({
     // Add the first hashtag even if there are many of them
     Meteor.call('addDefaultHashtag', Meteor.userId(), hashtagArr[0]);
       
-    // Claer 
+    // Claer search input
     $('.prompt').val('');
     
   },
   "click #remove-defaulthashtag": function (event) {
     event.preventDefault();
     let removeHashtag = event.currentTarget.textContent.trim();
+
     Meteor.call('removeDefaultHashtag', Meteor.userId(), removeHashtag);
 
   }
-
-
-
+  
 });

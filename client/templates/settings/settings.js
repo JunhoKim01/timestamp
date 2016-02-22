@@ -1,30 +1,20 @@
-Session.setDefault('editUsername', false); // home or profile
-
 Template.settings.onCreated(function () {
   this.autorun(() => {
     this.subscribe('hashtag');
   });
 });
 
-
-
 Template.settings.helpers ({
-
   editUsername: function () {
     return Session.get('editUsername');
   },
-
 	userName: function() {
 		return Meteor.user().profile.name;
 	},
   userEmail: function() {
     return Meteor.user().emails[0].address;
   }
-
-	
-
 });
-
 
 Template.settings.events ({
   "click #edit-username": function (event) {
@@ -49,8 +39,5 @@ Template.settings.events ({
     //Meteor.call('resetPasswordWithEmail', Meteor.userId());
     Accounts.forgotPassword({email: Meteor.user().emails[0].address});
     
-  },
-
-
-
+  }
 });

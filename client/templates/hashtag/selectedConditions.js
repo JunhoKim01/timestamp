@@ -1,21 +1,13 @@
-
-
-
 Template.selectedConditions.helpers ({
-  
   selectedConditions: function () {
-    let conditionArr = Session.get('conditions');
-
-    return conditionArr;
+    //return Session.get('conditions');
+    return conditionsArr;
   },
   isSelected: function (condition) {
-  
-    if (_.contains(Session.get('selectedConditions'), condition)) {
+    if (_.contains(Session.get('selectedConditions'), condition))
       return true;
-    } else {
+    else 
       return false;
-    }
-    
   }
   
 });

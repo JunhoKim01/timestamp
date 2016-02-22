@@ -1,7 +1,3 @@
-// session
-
-Session.setDefault('tabStatus', 'contents'); // home or profile
-
 Template.app.helpers ({
 	getTabStatus: function () { 
 		return Session.get('tabStatus'); 
@@ -71,8 +67,13 @@ Template.menubar.events ({
 	},
 	"click #logout": function(event) {
 		event.preventDefault();
-		Meteor.logout(function() {
-			Router.go('splash');
+		Meteor.logout(function(error) {
+      if (error) {
+        throw new Meteor.error('logout failed');
+      } else {
+			 Router.go('splash');
+      }
+
 		});
 	}
 

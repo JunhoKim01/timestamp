@@ -1,18 +1,14 @@
-Session.setDefault('editUsername', false); // home or profile
-
 Template.profile.helpers ({
   editUsername: function () {
     return Session.get('editUsername');
   },
-
   userName: function() {
     return Meteor.user().profile.name;
   },
   userEmail: function() {
     return Meteor.user().emails[0].address;
   }
-
-
+  
 });
 
 
@@ -38,7 +34,6 @@ Template.profile.events ({
     event.preventDefault();
     //Meteor.call('resetPasswordWithEmail', Meteor.userId());
     Accounts.forgotPassword({email: Meteor.user().emails[0].address});
-    
-  },
+  }
 
 });

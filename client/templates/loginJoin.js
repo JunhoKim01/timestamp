@@ -1,15 +1,9 @@
 // session
-const isJoin = 'isJoin';
-Session.setDefault(isJoin, false);
-
-
 const ERRORS_KEY = 'loginErrors';
 Template.loginJoin.onCreated(function() {
   Session.set(ERRORS_KEY, {});
 });
 
-
-/* helpers */
 Template.loginJoin.helpers({
   errorMessages: function() {
       return _.values(Session.get(ERRORS_KEY));
@@ -19,14 +13,9 @@ Template.loginJoin.helpers({
   },
   isJoin: function() {
     return Session.get(isJoin); 
-  },
-
-
-
+  }
 });
 
-
-/* events */
 Template.loginJoin.events ({
   "click #loginJoin": function (event, template) {
     event.preventDefault();
@@ -47,19 +36,16 @@ Template.loginJoin.events ({
     }
 
     Session.set(ERRORS_KEY, errors);
-    if (_.keys(errors).length) {
-      return;
-    }
-
-
-    // Check email address. 
+    if (_.keys(errors).length)
+      return false;
+    
+    // Check email address
     const regex = /[a-zA-Z0-9]+(?:(\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/g; // email regex
     if (! email.match(regex)) {
       errors.email = 'Use Appropriate Email address'
       Session.set(ERRORS_KEY, errors);
-      if (_.keys(errors).length) {
+      if (_.keys(errors).length)
         return;
-      }
     }
 
     if (Session.get(isJoin)) {
@@ -75,39 +61,40 @@ Template.loginJoin.events ({
         errors.confirm = 'Please confirm your password';
         console.log('Please confirm your password');
       } else if (password.length < 8 || password.length > 20 ) {
-        errors.confirm = 'Password must be 8~20 letters';
+        errors.confirm = 'Password must be 8 ~ 20 letters';
       }
 
       Session.set(ERRORS_KEY, errors);
-      if (_.keys(errors).length) {
+      if (_.keys(errors).length)
         return;
-      }
       
       // Create user
-      Accounts.createUser({
+      const options = {
         email: email,
         password: password,
+        createdAt: Date.now(),
         profile: {
           name:username,
-          defaultHashtag:[]
+          defaultHashtag:[],
+          defaultInTime: 9,    // 09 hour
+          defaultMinute: 0     // 00 minute
         }
-      }, function(error) {
-        if (error) {
+      };
+      Accounts.createUser(options, function(error) {
+        if (error)
           return Session.set(ERRORS_KEY, {'create': error.reason});
-        }
 
-        Router.go('app');
+        Session.set('tabStatus', 'home'); // home, profile, settings
+        Router.go('app'); // Move to main page
       });
-
     } else {
       // Login
-      Meteor.loginWithPassword(email, password, 
-        function(error) {
-          if (error) {
-            return Session.set(ERRORS_KEY, {'login': error.reason});
-          }
-          Router.go('app');
-        });
+      Meteor.loginWithPassword(email, password, function(error) {
+        if (error)
+          return Session.set(ERRORS_KEY, {'login': error.reason});
+
+        Router.go('app'); // Move to main page
+      });
     }
 
   },

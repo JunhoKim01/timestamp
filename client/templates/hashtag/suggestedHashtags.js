@@ -1,11 +1,8 @@
-//hashtag-suggestedHashtag.js
-
 Template.suggestedHashtags.helpers ({
     suggestedHashtags: function () {
       return Hashtag.find(
         // selector
-        {
-          count: 
+        { count: 
             {$gte: 1}
         },
         // options

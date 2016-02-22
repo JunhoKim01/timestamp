@@ -1,0 +1,36 @@
+<template name="deleteAccount">
+  <div class="column">
+    <h2 class="ui header">Delete account</h2>
+      Click <a id="deleteAccount">here</a> to sign out
+  </div>
+</template>
+
+<template name="modalDeleteAccount">
+  <div class="ui basic modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Delete Account
+    </div>
+    <div class="image content">
+      <div class="image">
+        <i class="trash icon"></i>
+      </div>
+      <div class="description">
+        <p>If you delete this accounts, all timestamps will gone.</p>
+        <p>Do you really want delete your accounts?</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="two fluid ui inverted buttons">
+        <div class="ui cancel red basic inverted button">
+          <i class="remove icon"></i>
+          No
+        </div>
+        <div class="ui approve green basic inverted button">
+          <i class="checkmark icon"></i>
+          Yes
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

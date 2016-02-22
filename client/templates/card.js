@@ -1,10 +1,7 @@
-
-
 Template.inputCard.onRendered(function () {
-
+	// Set default hashtags
 	const hashtagArr = Meteor.user().profile.defaultHashtag;
 	$('#add-newCheckText').val(hashtagArr);
-
 });
 
 Template.card.helpers({
@@ -20,8 +17,6 @@ Template.card.helpers({
 			return 'editable';
 	}
 });
-
-
 
 Template.card.events ({
 	"click #remove-item": function (event, template) {
@@ -110,6 +105,7 @@ Template.card.events ({
 		// })
 		// .modal('show');  
 	},
+	// Deprecated
 	"click #remove-hashtag":function (event) {
 		event.preventDefault();
 		let removeHashtag = event.currentTarget.previousSibling.wholeText.trim();
