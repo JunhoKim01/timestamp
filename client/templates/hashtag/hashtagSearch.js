@@ -11,11 +11,9 @@ Template.hashtagSearch.onRendered(function () {
 
       const options = {
         source: hashtagDB,
-        fields: {
-          title: 'name'
-        },
+        fields: {title: 'name'},
         searchFields: ['name'],
-        searchFullText: true,
+        searchFullText: true, // s
         onSelect: function (item) {
           let addHashtag = item.name;
           // if (addHashtag.charAt(0) === '#')
@@ -34,7 +32,6 @@ Template.hashtagSearch.onRendered(function () {
 
       $('.ui.search').search(options);
 
-      console.log('Initialized Search');
     }
   });
 

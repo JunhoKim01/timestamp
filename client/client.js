@@ -22,7 +22,7 @@ if (Meteor.isClient) {
 
     // Session default set
     initSession();
-
+    
 
   });
   

@@ -113,8 +113,8 @@ Template.contents.events ({
 
 
       // Set hours as defaultHour:defaultMinute:00:000
-      const defaultHour = Meteor.user().profile.defaultInTimeHour || 9;
-      const defaultMinute = Meteor.user().profile.defaultInTimeMinute || 0;
+      const defaultHour = Meteor.user().profile.defaultInHour || 9;
+      const defaultMinute = Meteor.user().profile.defaultInMinute || 0;
       checkInTimeObj.setHours(defaultHour, defaultMinute, 0, 0);
 
 
@@ -150,6 +150,7 @@ Template.contents.events ({
       // When there is no text
       if (text === '') {
         Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, []);
+        return;
       } 
 
       // Extract hashtag from text

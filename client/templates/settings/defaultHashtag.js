@@ -1,4 +1,4 @@
-Template.defaultHashtag.onCreated (function () {
+Template.defaultHashtag.onRendered (function () {
 
   this.autorun(() => {
     if (this.subscriptionsReady()) {

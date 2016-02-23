@@ -76,8 +76,8 @@ Template.loginJoin.events ({
         profile: {
           name:username,
           defaultHashtag:[],
-          defaultInTime: 9,    // 09 hour
-          defaultMinute: 0     // 00 minute
+          defaultInHour: '09',      // 09 hour 00 ~ 24
+          defaultInMinute: '00'     // 00 minute 00 ~ 59
         }
       };
       Accounts.createUser(options, function(error) {
