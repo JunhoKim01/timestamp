@@ -1,21 +1,41 @@
 Template.inputCard.onRendered(function () {
 	// Set default hashtags
 	const hashtagArr = Meteor.user().profile.defaultHashtag;
-	$('#add-newCheckText').val(hashtagArr);
+	$('#add-newCheckText').text(hashtagArr);
 });
 
 Template.card.helpers({
 	isEditMode: function () {
 		return Session.get('isEditMode');
 	},
-	isReadonly: function () {
+	editable: function () {
 		const self = this;
 
 		if (self.inTime && self.outTime)
-			return 'readonly';
+			return 'false';
 		else
-			return 'editable';
+			return 'true';
 	}
+});
+
+Template.inputCard.helpers({
+	date: function () {
+	  return moment().format('LL') + ' (' + moment().format('ddd') + ')';
+	}
+});
+
+Template.inputCard.events({
+	// "keyup #add-newCheckText": function () {
+		
+	// 	let text = $('#add-newCheckText').text();
+	// 	let result = text.replace(myHashtag.getRegexp, '<a class="hashtag">$1</a>');
+
+
+	// 	$('#add-newCheckText').text(result);
+		
+
+
+	// }
 });
 
 Template.card.events ({

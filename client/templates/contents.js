@@ -39,13 +39,19 @@ Template.contents.helpers ({
         // item.hashtag.forEach(function (currentValue, index, array) {
         //   array[index] = '#' + currentValue;
         // });
+
+        item.text = item.text.replace(myHashtag.getRegexp, '<a class="hashtag">$&</a>');
+
       }); 
+
+
 
     return card;
   },
-  date: function () {
-    return moment().format('LL');
-  }, 
+  replace: function (text) {
+    return text.replace(myHashtag.getRegexp, '<a class="hashtag">$&</a>');
+  },
+  
   canLoadMore: function () {
     // Return true if there are not loaded items.
     if (Session.get('loadedItemCount') >= Session.get('loadableItemCount'))
@@ -83,12 +89,12 @@ Template.contents.events ({
 
       const checkInTime = Date.now(); // javascript date now
       const checkOutTime = null; 
-      const text = $('#add-newCheckText').val().trim();
+      const text = $('#add-newCheckText').text().trim();
       // When there is no text
       if (text === '') { 
         Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text,[]);  
         // Clear the textarea & set default hashtag\
-        $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+        $('#add-newCheckText').text(Meteor.user().profile.defaultHashtag);
         return;  
       }
 
@@ -97,7 +103,7 @@ Template.contents.events ({
       // Method call
       Meteor.call('addNewCheckIn', checkInTime, checkOutTime, text, hashtagArr);
       // Clear the textarea & set default hashtag
-      $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+      $('#add-newCheckText').text(Meteor.user().profile.defaultHashtag);
     },
 
     // Create new check-in & check out time at once.
@@ -120,22 +126,24 @@ Template.contents.events ({
 
       const checkInTime = checkInTimeObj.getTime();
 
-      const text = $('#add-newCheckText').val().trim();
+      const text = $('#add-newCheckText').text().trim();
       // When there is no text
       if (text === '') { 
         Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text,[]);  
         // Clear the textarea
-        $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+        $('#add-newCheckText').text(Meteor.user().profile.defaultHashtag);
         return;  
       }
 
       // Extract hashtag from text
       const hashtagArr = myHashtag.find(text);
+      //const html = text.replace(myHashtag.getRegexp, '<a class="hashtag">$&</a>');
       //console.log(hashtagArr);
       // Method call
       Meteor.call('addNewCheckOut', checkInTime, checkOutTime, text, hashtagArr);
       // Clear the textarea & set default hashtag
-      $('#add-newCheckText').val(Meteor.user().profile.defaultHashtag);
+
+      $('#add-newCheckText').text(Meteor.user().profile.defaultHashtag);
     },
 
     // Add check-out log to already exist card. 

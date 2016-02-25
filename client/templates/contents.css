@@ -47,3 +47,18 @@ div.ui.cards {
   text-decoration: none;
 }
 
+[contentEditable=true]:empty:before{
+  content:attr(data-placeholder);
+  color:gray;
+
+}
+
+[contentEditable=true] {
+  min-height: 64px;    
+
+}
+
+
+
+
+

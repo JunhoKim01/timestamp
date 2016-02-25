@@ -8,11 +8,12 @@
             <i class="remove icon"></i>
           </a>
         {{/if}}
-      <div class="ui fluid transparent form">
+          <div id="" contentEditable="false">{{{text}}}</div>
+      <!-- <div class="ui fluid transparent form">
         <div class="field">
           <textarea {{isReadonly}} rows="2">{{text}}</textarea>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="ui fluid transparent input">
         <input type="text" placeholder="How`s today?">
       </div> -->  
@@ -41,13 +42,21 @@
 
 <template name="inputCard">
   <div class="card">
+    <div class="ui top attached segment">
+      <h4 class="ui header">Create new timestamp</h4>
+    </div>
     <div class="ui attached segment">
-      <h4 class="ui header">{{date}}</h4>
-      <div class="ui fluid transparent form">
+      
+
+      <!-- <div class="ui fluid transparent form">
         <div class="field">
           <textarea id="add-newCheckText" rows="4" placeholder="How`s today?"></textarea>
         </div>
-      </div>
+      </div> -->
+
+      
+      <div id="add-newCheckText" contentEditable="true" data-placeholder="How`s today?"></div>
+
       <!-- <div class="ui fluid transparent input">
         <input type="text" placeholder="How`s today?">
       </div> -->  
