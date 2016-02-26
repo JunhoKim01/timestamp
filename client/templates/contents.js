@@ -56,7 +56,7 @@ Template.contents.helpers ({
   },
   
   canLoadMore: function () {
-    // Return true if there are not loaded items.
+    // Return true if there are more loadable items.
     if (Session.get('loadedItemCount') >= Session.get('loadableItemCount'))
       return true;
     else
@@ -183,9 +183,13 @@ Template.contents.events ({
 
     "click #toggleNewTimestamp": function (event) {
       event.preventDefault();
-      console.log('df');
       Session.set('isInput', ! Session.get('isInput'));
+      // document.getElementById('add-newCheckText').focus();
 
+    },
+    "click .ui.top.attached.segment": function (event) {
+      event.preventDefault();
+      Session.set('isInput', ! Session.get('isInput'));
     },
 
     // -----------------------

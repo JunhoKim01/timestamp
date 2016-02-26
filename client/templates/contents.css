@@ -33,6 +33,9 @@ div.main {
 }
 */
 
+.card {
+  margin-top: 0.775em;
+}
 
 
 div.ui.cards {
@@ -46,18 +49,20 @@ div.ui.cards {
   font-weight: bold;
 }
 
+
+
+
 [contentEditable=true]:empty:before{
   content:attr(data-placeholder);
   color:gray;
 
 }
+[contentEditable=true]:focus{
+  background-color: #cce2ff;
+}
 
-[contentEditable=true] {
+#add-newCheckText[contentEditable=true] {
   min-height: 64px;    
 
 }
-
-
-
-
 

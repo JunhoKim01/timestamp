@@ -61,6 +61,7 @@ Template.menubar.events ({
 	"click #toggle-edit": function (event) {
 		event.preventDefault();
 		Session.set('isEditMode',!Session.get('isEditMode'));
+    Session.set('isInput', false);
 	},
 	"click #settings": function (event) {
 		event.preventDefault();

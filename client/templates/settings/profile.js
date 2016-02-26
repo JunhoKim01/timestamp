@@ -8,7 +8,6 @@ Template.profile.helpers ({
   userEmail: function() {
     return Meteor.user().emails[0].address;
   }
-  
 });
 
 
@@ -16,6 +15,7 @@ Template.profile.events ({
   "click #edit-username": function (event) {
     event.preventDefault();
     Session.set('editUsername', true);
+    $('#input-username').focus();
     
   },
   // "blur #edit-username": function (event) {
@@ -26,7 +26,11 @@ Template.profile.events ({
   // },
   "click #done-username": function (event) {
     event.preventDefault();
-    Meteor.call('changeUsername', Meteor.userId(), $('#input-username').val().trim());
+    Meteor.call('changeUsername', Meteor.userId(), $('#input-username').text().trim(),
+      function (error, result) {
+        if (error)
+          console.log(error);
+      });
     Session.set('editUsername', false);
     
   },

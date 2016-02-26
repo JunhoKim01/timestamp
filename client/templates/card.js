@@ -2,6 +2,17 @@ Template.inputCard.onRendered(function () {
 	// Set default hashtags
 	const hashtagArr = Meteor.user().profile.defaultHashtag;
 	$('#add-newCheckText').text(hashtagArr);
+
+	// TODO: ios safari focus
+	$('#add-newCheckText').focus();
+
+	// $('#add-newCheckText').trigger('touchstart');
+
+	// $('#add-newCheckText').on('touchstart', function () {
+ //        $(this).focus();   // inside this function the focus works
+        
+ //    });
+
 });
 
 
