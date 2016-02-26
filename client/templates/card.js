@@ -4,19 +4,7 @@ Template.inputCard.onRendered(function () {
 	$('#add-newCheckText').text(hashtagArr);
 });
 
-Template.card.helpers({
-	isEditMode: function () {
-		return Session.get('isEditMode');
-	},
-	editable: function () {
-		const self = this;
 
-		if (self.inTime && self.outTime)
-			return 'false';
-		else
-			return 'true';
-	}
-});
 
 Template.inputCard.helpers({
 	date: function () {
@@ -36,6 +24,23 @@ Template.inputCard.events({
 
 
 	// }
+});
+
+
+
+
+Template.card.helpers({
+	isEditMode: function () {
+		return Session.get('isEditMode');
+	},
+	editable: function () {
+		const self = this;
+
+		if (self.inTime && self.outTime)
+			return 'false';
+		else
+			return 'true';
+	}
 });
 
 Template.card.events ({

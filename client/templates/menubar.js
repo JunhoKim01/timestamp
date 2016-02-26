@@ -37,6 +37,8 @@ Template.menubar.events ({
   		// console.log(event);
   		// alert('home clicked');
   		Session.set('tabStatus', 'contents');
+      Session.set('isInput', false);
+
       
   	},
   	"click #hashtag": function (event) {

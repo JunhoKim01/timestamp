@@ -51,6 +51,9 @@ Template.contents.helpers ({
   replace: function (text) {
     return text.replace(myHashtag.getRegexp, '<a class="hashtag">$&</a>');
   },
+  isInput: function () {
+    return Session.get('isInput');
+  },
   
   canLoadMore: function () {
     // Return true if there are not loaded items.
@@ -65,6 +68,11 @@ Template.contents.helpers ({
 
 
 Template.contents.events ({
+
+  // -----------------------
+  // Edit timestamp
+  // -----------------------  
+
   "click .remove": function (event) {
 
     event.preventDefault();
@@ -78,6 +86,8 @@ Template.contents.events ({
 
       //Meteor.call("editItem");      
     },
+
+
 
     // -----------------------
     // Check in & out buttons
@@ -167,16 +177,16 @@ Template.contents.events ({
       Meteor.call('addExistingCheckOut', self._id, checkOutTime, text, hashtagArr);
     },
 
-
-
     // -----------------------
-    // Edit mode buttons
+    // New input
     // -----------------------  
 
+    "click #toggleNewTimestamp": function (event) {
+      event.preventDefault();
+      console.log('df');
+      Session.set('isInput', ! Session.get('isInput'));
 
-    
-
-
+    },
 
     // -----------------------
     // Dropdown buttons
@@ -187,7 +197,7 @@ Template.contents.events ({
       
         //$('.ui.dropdown').dropdown();
 
-      },
+    },
 
     // -----------------------
     // Load more items
@@ -200,7 +210,6 @@ Template.contents.events ({
 
 
 
-
-    });
+});
 
 

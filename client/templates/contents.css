@@ -42,9 +42,8 @@ div.ui.cards {
 
 .hashtag {
 
-  color: #FD7A79;
-  font-style: bold;
-  text-decoration: none;
+  color: #1678c2;
+  font-weight: bold;
 }
 
 [contentEditable=true]:empty:before{

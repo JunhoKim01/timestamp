@@ -1,12 +1,17 @@
 <template name="contents">
   <!-- <div class="main">  -->
+    
     <div class="ui one cards"> <!-- Has a problem of showing just one row in wider screens -->
       <!-- Add new timestamp -->
 
       {{#if Template.subscriptionsReady}}
-        {{>inputCard}}
+        {{#if isInput}}
+          {{>inputCard}}
+        {{else}}
+          {{>newTimestampOpen}}
+        {{/if}}
 
-        {{#each timestamps}}
+        {{#each timestamps}}  
           {{> card}}
         {{/each}}
 
