@@ -52,14 +52,22 @@ div.ui.cards {
 
 
 
+
+[contentEditable=true] {
+  transition: background-color 0.5s ease;
+}
+
 [contentEditable=true]:empty:before{
   content:attr(data-placeholder);
   color:gray;
+
+  
 
 }
 [contentEditable=true]:focus{
   background-color: #cce2ff;
 }
+
 
 #add-newCheckText[contentEditable=true] {
   min-height: 64px;    

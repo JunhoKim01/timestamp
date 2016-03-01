@@ -51,9 +51,7 @@ Template.contents.helpers ({
   replace: function (text) {
     return text.replace(myHashtag.getRegexp, '<a class="hashtag">$&</a>');
   },
-  isInput: function () {
-    return Session.get('isInput');
-  },
+  
   
   canLoadMore: function () {
     // Return true if there are more loadable items.
@@ -181,12 +179,7 @@ Template.contents.events ({
     // New input
     // -----------------------  
 
-    "click #toggleNewTimestamp": function (event) {
-      event.preventDefault();
-      Session.set('isInput', ! Session.get('isInput'));
-      // document.getElementById('add-newCheckText').focus();
-
-    },
+    
     "click .ui.top.attached.segment": function (event) {
       event.preventDefault();
       Session.set('isInput', ! Session.get('isInput'));

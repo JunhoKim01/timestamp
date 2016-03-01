@@ -5,11 +5,8 @@
       <!-- Add new timestamp -->
 
       {{#if Template.subscriptionsReady}}
-        {{#if isInput}}
-          {{>inputCard}}
-        {{else}}
-          {{>newTimestampOpen}}
-        {{/if}}
+        
+        {{>inputCard}}
 
         {{#each timestamps}}  
           {{> card}}

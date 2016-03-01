@@ -41,42 +41,31 @@
 
 
 <template name="inputCard">
-  <div class="card">
-    <div class="ui top attached segment">
-      <h4 class="ui header">Create new timestamp</h4>
-    </div>
-    <div class="ui attached segment">
-      
+  <div id="inputCard" class="card">
+    {{#if isInput}}
+      <div id="toggleNewTimestamp" class="ui top attached segment">
+        <h4 class="ui header">Create new timestamp</h4>
+      </div>
 
-      <!-- <div class="ui fluid transparent form">
-        <div class="field">
-          <textarea id="add-newCheckText" rows="4" placeholder="How`s today?"></textarea>
+      <div id="slidingPart">
+        <div class="ui attached segment">
+          <div tabindex="-1" id="add-newCheckText" contentEditable="true" data-placeholder="How`s today?"></div>
         </div>
-      </div> -->
-
-      
-      <div tabindex="-1" id="add-newCheckText" contentEditable="true" data-placeholder="How`s today?"></div>
-
-      <!-- <div class="ui fluid transparent input">
-        <input type="text" placeholder="How`s today?">
-      </div> -->  
-    </div>
-    <div class="ui two bottom attached buttons">
-      <div class="ui green button" id="add-newCheckIn">
-        In
+        <div class="ui two bottom attached buttons">
+          <div class="ui green button" id="add-newCheckIn">In</div>
+          <div class="ui green button" id="add-newCheckOut">Out</div>
+        </div>
       </div>
-
-      <div class="ui green button" id="add-newCheckOut">
-        Out
+    {{else}}
+      <div id="toggleNewTimestamp" class="ui raised segment">
+        <h4 class="ui header">Create new timestamp</h4>
       </div>
-    </div>
+    {{/if}}
   </div>
 </template>
 
-<template name="newTimestampOpen">
+<!-- <template name="newTimestampOpen">
   <div class="card">
-    <div id="toggleNewTimestamp" class="ui raised segment">
-      <h4 class="ui header">Create new timestamp</h4>
-    </div>
+    
   </div>
-</template>
+</template> -->

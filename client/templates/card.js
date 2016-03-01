@@ -13,6 +13,17 @@ Template.inputCard.onRendered(function () {
         
  //    });
 
+	// $('#inputCard').on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd",
+ // function(e){
+ // 	if ($('#inputCard').attr('expanded') === 'true')
+ // 		Session.set('isInput', true);
+ // 	else 
+ // 		Session.set('isInput', false);
+ // });
+
+
+	
+
 });
 
 
@@ -20,10 +31,37 @@ Template.inputCard.onRendered(function () {
 Template.inputCard.helpers({
 	date: function () {
 	  return moment().format('LL') + ' (' + moment().format('ddd') + ')';
-	}
+	},
+	isInput: function () {
+    //return Session.get('isInput');
+    return true;
+  }
 });
 
 Template.inputCard.events({
+	"click #toggleNewTimestamp": function (event) {
+      event.preventDefault();
+      //Session.set('isInput', ! Session.get('isInput'));
+      //document.getElementById('inputCard').active();
+
+       $("#slidingPart").slideToggle(300, function () {
+
+					$('#add-newCheckText').focus();
+       });
+      // if ($('#inputCard').attr('expanded') === 'true') {
+
+      // 	$('#inputCard').attr('expanded', 'false');
+      // 	$('#inputCardText').attr('expanded', 'false');
+      // 	$('#inputCardButton').attr('expanded', 'false');
+      // }
+      // else  {
+      // 	$('#inputCard').attr('expanded', 'true');
+      // 	$('#inputCardText').attr('expanded', 'true');
+      // 	$('#inputCardButton').attr('expanded', 'true');
+      // }
+			
+    },
+
 	// "keyup #add-newCheckText": function () {
 		
 	// 	let text = $('#add-newCheckText').text();
@@ -38,7 +76,9 @@ Template.inputCard.events({
 });
 
 
-
+Template.card.onRendered({
+	// TODO: highlight newly created card
+});
 
 Template.card.helpers({
 	isEditMode: function () {
